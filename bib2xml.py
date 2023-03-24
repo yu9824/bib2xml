@@ -77,7 +77,7 @@ for key, entry in bibdata.entries.items():
 
     srctypes = {
         "book": "Book",
-        "article": "ArticleInAPeriodical",
+        "article": "JournalArticle",
         "incollection": "ArticleInAPeriodical",
         "inproceedings": "ConferenceProceedings",
         "misc": "Misc",
@@ -113,7 +113,8 @@ for key, entry in bibdata.entries.items():
         ("b:Institution", "institution"),
         ("b:JournalName", "journal"),
         ("b:Month", "month"),
-        ("b:Volume", "number"),
+        ("b:Volume", "volume"),
+        ("b:Issue", "number"),
         ("b:Pages", "pages"),
         ("b:Type", "type"),
         ("b:URL", "howpublished"),
