@@ -122,8 +122,8 @@ for key, entry in bibdata.entries.items():
         ("b:Type", "type"),
         ("b:URL", "howpublished"),
     )
-    for msft, bibtex in xlate:
-        source = add_element(source, msft, bibtex)
+    for msft, bibft in xlate:
+        source = add_element(source, msft, bibft)
 
     authors0 = ET.SubElement(source, "b:Author")
     authors1 = ET.SubElement(authors0, "b:Author")
