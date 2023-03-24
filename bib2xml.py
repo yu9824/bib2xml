@@ -41,34 +41,30 @@ parser.add_option(
     help="output filename",
     action="store",
 )
-(options, args) = parser.parse_args()
+options, args = parser.parse_args()
 
 parser = bibtex.Parser()
 
 try:
     bibdata = parser.parse_file(options.bibtexfile)
 except NameError:
-    print >> sys.stderr, "Need an input filename. See --help"
+    print("Need an input filename. See --help", file=sys.stderr)
     sys.exit(1)
 
 if len(args) > 0:
-    print >> sys.stderr, "Warning: extra arguments ignored: " % " ".join(args)
+    print(
+        "Warning: extra arguments ignored: " % " ".join(args), file=sys.stderr
+    )
 
+url_schema = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
 try:
-    ET.register_namespace(
-        "", "http://schemas.microsoft.com/office/word/2004/10/bibliography"
-    )
-    ET.register_namespace(
-        "b", "http://schemas.microsoft.com/office/word/2004/10/bibliography"
-    )
+    ET.register_namespace("", url_schema)
+    ET.register_namespace("b", url_schema)
     root = ET.parse(options.inxml).getroot()
 except TypeError:
     root = ET.Element(
         "b:Sources",
-        {
-            "xmlns:b": "http://schemas.microsoft.com/office/word/2004/10/bibliography"
-            ""
-        },
+        {"xmlns:b": url_schema},
     )
 
 for key, entry in bibdata.entries.items():
