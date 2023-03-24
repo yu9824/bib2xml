@@ -10,11 +10,21 @@ You may already have the BibTex files and can't use Overleaf or prefer to use Wo
 
 Using Python3, you can just run the code giving the input and output paths:
 
-    run bibtex2word.py -i bib-example.bib -o bib-example-xml.xml
+Windows
 
-After getting the XML file, You can go to: 
+```python
+python -m bibtex2xml -i bib-example.bib -o bib-example-xml.xml
+```
 
-    Word > References > Manage Sources 
+OSX/LINUX
+
+```python
+python3 -m bibtex2xml -i bib-example.bib -o bib-example-xml.xml
+```
+
+After getting the XML file, You can go to:
+
+    Word > References > Manage Sources
 and then push the XML file to your source document in word.
 
 The original code can be found at: [Paralax's Repo](https://github.com/paralax/bibtex2word)
