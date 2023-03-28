@@ -12,13 +12,13 @@ Using Python3, you can just run the code giving the input and output paths:
 
 Windows
 
-```python
+```bash
 python -m bibtex2xml -i bib-example.bib -o bib-example-xml.xml
 ```
 
 OSX/LINUX
 
-```python
+```bash
 python3 -m bibtex2xml -i bib-example.bib -o bib-example-xml.xml
 ```
 
