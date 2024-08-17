@@ -1,22 +1,27 @@
 #!/usr/bin/python
 
+import argparse
 import sys
-from optparse import OptionParser
 import xml.etree.cElementTree as ET
+from pathlib import Path
+from typing import Optional, Union
 
-from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
+if sys.version_info >= (3, 8):
+    from typing import Literal
+else:
+    from typing_extensions import Literal
 
 import pybtext_conversion_helper
+from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
 
-parser = OptionParser()
-parser.add_option(
+parser = argparse.ArgumentParser()
+parser.add_argument(
     "-a",
     "--append",
     dest="inxml",
-    action="store",
     help="existing filename (e.g. Sources.xml) to append elements to",
 )
-parser.add_option(
+parser.add_argument(
     "-d",
     "--debug",
     dest="debug",
@@ -24,22 +29,21 @@ parser.add_option(
     default=False,
     help="debug (useful for broken .bib entries)",
 )
-parser.add_option(
+parser.add_argument(
     "-i",
     "--input",
     dest="bibtexfile",
-    type="string",
+    type=Path,
     help="input bibtex filename",
-    action="store",
 )
-parser.add_option(
+parser.add_argument(
     "-o",
     "--output",
     dest="xmlfile",
-    type="string",
-    default=sys.stdout,
+    type=Path,
+    default=None,
+    const=True,
     help="output filename",
-    action="store",
 )
 options, args = parser.parse_args()
 
