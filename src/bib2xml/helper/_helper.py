@@ -7,1130 +7,1134 @@ Modified on March 24 2023
 @author: yu9824
 """
 
-from copy import copy
+from typing import Union
 
 
-def convert(text: str) -> str:
-    if type(text) is not str:
-        raise TypeError("Input must be a string.")
-    new_text = copy(text)
-    new_text = new_text.replace(r"{\'{a}}", r"á")
-    new_text = new_text.replace(r"{\'{c}}", r"ć")
-    new_text = new_text.replace(r"{\'{e}}", r"é")
-    new_text = new_text.replace(r"{\'{g}}", r"ǵ")
-    new_text = new_text.replace(r"{\'{i}}", r"í")
-    new_text = new_text.replace(r"{\'{n}}", r"ń")
-    new_text = new_text.replace(r"{\'{o}}", r"ó")
-    new_text = new_text.replace(r"{\'{r}}", r"ŕ")
-    new_text = new_text.replace(r"{\'{s}}", r"ś")
-    new_text = new_text.replace(r"{\'{u}}", r"ú")
-    new_text = new_text.replace(r"{\'{w}}", r"ẃ")
-    new_text = new_text.replace(r"{\'{y}}", r"ý")
-    new_text = new_text.replace(r"{\'{z}}", r"ź")
-    new_text = new_text.replace(r"{\'{\a}}", r"á")
-    new_text = new_text.replace(r"{\'{\c}}", r"ć")
-    new_text = new_text.replace(r"{\'{\e}}", r"é")
-    new_text = new_text.replace(r"{\'{\g}}", r"ǵ")
-    new_text = new_text.replace(r"{\'{\i}}", r"í")
-    new_text = new_text.replace(r"{\'{\n}}", r"ń")
-    new_text = new_text.replace(r"{\'{\o}}", r"ó")
-    new_text = new_text.replace(r"{\'{\r}}", r"ŕ")
-    new_text = new_text.replace(r"{\'{\s}}", r"ś")
-    new_text = new_text.replace(r"{\'{\u}}", r"ú")
-    new_text = new_text.replace(r"{\'{\w}}", r"ẃ")
-    new_text = new_text.replace(r"{\'{\y}}", r"ý")
-    new_text = new_text.replace(r"{\'{\z}}", r"ź")
-    new_text = new_text.replace(r"{\' a}", r"á")
-    new_text = new_text.replace(r"{\' c}", r"ć")
-    new_text = new_text.replace(r"{\' e}", r"é")
-    new_text = new_text.replace(r"{\' g}", r"ǵ")
-    new_text = new_text.replace(r"{\' i}", r"í")
-    new_text = new_text.replace(r"{\' n}", r"ń")
-    new_text = new_text.replace(r"{\' o}", r"ó")
-    new_text = new_text.replace(r"{\' r}", r"ŕ")
-    new_text = new_text.replace(r"{\' s}", r"ś")
-    new_text = new_text.replace(r"{\' u}", r"ú")
-    new_text = new_text.replace(r"{\' w}", r"ẃ")
-    new_text = new_text.replace(r"{\' y}", r"ý")
-    new_text = new_text.replace(r"{\' z}", r"ź")
-    new_text = new_text.replace(r"{\'a}", r"á")
-    new_text = new_text.replace(r"{\'c}", r"ć")
-    new_text = new_text.replace(r"{\'e}", r"é")
-    new_text = new_text.replace(r"{\'g}", r"ǵ")
-    new_text = new_text.replace(r"{\'i}", r"í")
-    new_text = new_text.replace(r"{\'n}", r"ń")
-    new_text = new_text.replace(r"{\'o}", r"ó")
-    new_text = new_text.replace(r"{\'r}", r"ŕ")
-    new_text = new_text.replace(r"{\'s}", r"ś")
-    new_text = new_text.replace(r"{\'u}", r"ú")
-    new_text = new_text.replace(r"{\'w}", r"ẃ")
-    new_text = new_text.replace(r"{\'y}", r"ý")
-    new_text = new_text.replace(r"{\'z}", r"ź")
-    new_text = new_text.replace(r"{\'{A}}", r"Á")
-    new_text = new_text.replace(r"{\'{C}}", r"Ć")
-    new_text = new_text.replace(r"{\'{E}}", r"É")
-    new_text = new_text.replace(r"{\'{G}}", r"Ǵ")
-    new_text = new_text.replace(r"{\'{I}}", r"Í")
-    new_text = new_text.replace(r"{\'{N}}", r"Ń")
-    new_text = new_text.replace(r"{\'{O}}", r"Ó")
-    new_text = new_text.replace(r"{\'{R}}", r"Ŕ")
-    new_text = new_text.replace(r"{\'{S}}", r"Ś")
-    new_text = new_text.replace(r"{\'{U}}", r"Ú")
-    new_text = new_text.replace(r"{\'{W}}", r"Ẃ")
-    new_text = new_text.replace(r"{\'{Y}}", r"Ý")
-    new_text = new_text.replace(r"{\'{Z}}", r"Ź")
-    new_text = new_text.replace(r"{\'{\a}}", r"Á")
-    new_text = new_text.replace(r"{\'{\c}}", r"Ć")
-    new_text = new_text.replace(r"{\'{\e}}", r"É")
-    new_text = new_text.replace(r"{\'{\G}}", r"Ǵ")
-    new_text = new_text.replace(r"{\'{\I}}", r"Í")
-    new_text = new_text.replace(r"{\'{\n}}", r"Ń")
-    new_text = new_text.replace(r"{\'{\O}}", r"Ó")
-    new_text = new_text.replace(r"{\'{\r}}", r"Ŕ")
-    new_text = new_text.replace(r"{\'{\S}}", r"Ś")
-    new_text = new_text.replace(r"{\'{\U}}", r"Ú")
-    new_text = new_text.replace(r"{\'{\W}}", r"Ẃ")
-    new_text = new_text.replace(r"{\'{\Y}}", r"Ý")
-    new_text = new_text.replace(r"{\'{\Z}}", r"Ź")
-    new_text = new_text.replace(r"{\' A}", r"Á")
-    new_text = new_text.replace(r"{\' C}", r"Ć")
-    new_text = new_text.replace(r"{\' E}", r"É")
-    new_text = new_text.replace(r"{\' G}", r"Ǵ")
-    new_text = new_text.replace(r"{\' I}", r"Í")
-    new_text = new_text.replace(r"{\' N}", r"Ń")
-    new_text = new_text.replace(r"{\' O}", r"Ó")
-    new_text = new_text.replace(r"{\' R}", r"Ŕ")
-    new_text = new_text.replace(r"{\' S}", r"Ś")
-    new_text = new_text.replace(r"{\' U}", r"Ú")
-    new_text = new_text.replace(r"{\' W}", r"Ẃ")
-    new_text = new_text.replace(r"{\' Y}", r"Ý")
-    new_text = new_text.replace(r"{\' Z}", r"Ź")
-    new_text = new_text.replace(r"{\'A}", r"Á")
-    new_text = new_text.replace(r"{\'C}", r"Ć")
-    new_text = new_text.replace(r"{\'E}", r"É")
-    new_text = new_text.replace(r"{\'G}", r"Ǵ")
-    new_text = new_text.replace(r"{\'I}", r"Í")
-    new_text = new_text.replace(r"{\'N}", r"Ń")
-    new_text = new_text.replace(r"{\'O}", r"Ó")
-    new_text = new_text.replace(r"{\'R}", r"Ŕ")
-    new_text = new_text.replace(r"{\'S}", r"Ś")
-    new_text = new_text.replace(r"{\'U}", r"Ú")
-    new_text = new_text.replace(r"{\'W}", r"Ẃ")
-    new_text = new_text.replace(r"{\'Y}", r"Ý")
-    new_text = new_text.replace(r"{\'Z}", r"Ź")
-    new_text = new_text.replace(r"\'{a}", r"á")
-    new_text = new_text.replace(r"\'{c}", r"ć")
-    new_text = new_text.replace(r"\'{e}", r"é")
-    new_text = new_text.replace(r"\'{g}", r"ǵ")
-    new_text = new_text.replace(r"\'{i}", r"í")
-    new_text = new_text.replace(r"\'{n}", r"ń")
-    new_text = new_text.replace(r"\'{o}", r"ó")
-    new_text = new_text.replace(r"\'{r}", r"ŕ")
-    new_text = new_text.replace(r"\'{s}", r"ś")
-    new_text = new_text.replace(r"\'{u}", r"ú")
-    new_text = new_text.replace(r"\'{w}", r"ẃ")
-    new_text = new_text.replace(r"\'{y}", r"ý")
-    new_text = new_text.replace(r"\'{z}", r"ź")
-    new_text = new_text.replace(r"\'a", r"á")
-    new_text = new_text.replace(r"\'c", r"ć")
-    new_text = new_text.replace(r"\'e", r"é")
-    new_text = new_text.replace(r"\'g", r"ǵ")
-    new_text = new_text.replace(r"\'i", r"í")
-    new_text = new_text.replace(r"\'n", r"ń")
-    new_text = new_text.replace(r"\'o", r"ó")
-    new_text = new_text.replace(r"\'r", r"ŕ")
-    new_text = new_text.replace(r"\'s", r"ś")
-    new_text = new_text.replace(r"\'u", r"ú")
-    new_text = new_text.replace(r"\'w", r"ẃ")
-    new_text = new_text.replace(r"\'y", r"ý")
-    new_text = new_text.replace(r"\'z", r"ź")
-    new_text = new_text.replace(r"\'{\a}", r"á")
-    new_text = new_text.replace(r"\'{\c}", r"ć")
-    new_text = new_text.replace(r"\'{\e}", r"é")
-    new_text = new_text.replace(r"\'{\g}", r"ǵ")
-    new_text = new_text.replace(r"\'{\i}", r"í")
-    new_text = new_text.replace(r"\'{\n}", r"ń")
-    new_text = new_text.replace(r"\'{\o}", r"ó")
-    new_text = new_text.replace(r"\'{\r}", r"ŕ")
-    new_text = new_text.replace(r"\'{\s}", r"ś")
-    new_text = new_text.replace(r"\'{\u}", r"ú")
-    new_text = new_text.replace(r"\'{\w}", r"ẃ")
-    new_text = new_text.replace(r"\'{\y}", r"ý")
-    new_text = new_text.replace(r"\'{\z}", r"ź")
-    new_text = new_text.replace(r"\'{A}", r"Á")
-    new_text = new_text.replace(r"\'{C}", r"Ć")
-    new_text = new_text.replace(r"\'{E}", r"É")
-    new_text = new_text.replace(r"\'{G}", r"Ǵ")
-    new_text = new_text.replace(r"\'{I}", r"Í")
-    new_text = new_text.replace(r"\'{N}", r"Ń")
-    new_text = new_text.replace(r"\'{O}", r"Ó")
-    new_text = new_text.replace(r"\'{R}", r"Ŕ")
-    new_text = new_text.replace(r"\'{S}", r"Ś")
-    new_text = new_text.replace(r"\'{U}", r"Ú")
-    new_text = new_text.replace(r"\'{W}", r"Ẃ")
-    new_text = new_text.replace(r"\'{Y}", r"Ý")
-    new_text = new_text.replace(r"\'{Z}", r"Ź")
-    new_text = new_text.replace(r"\'A", r"Á")
-    new_text = new_text.replace(r"\'C", r"Ć")
-    new_text = new_text.replace(r"\'E", r"É")
-    new_text = new_text.replace(r"\'G", r"Ǵ")
-    new_text = new_text.replace(r"\'I", r"Í")
-    new_text = new_text.replace(r"\'N", r"Ń")
-    new_text = new_text.replace(r"\'O", r"Ó")
-    new_text = new_text.replace(r"\'R", r"Ŕ")
-    new_text = new_text.replace(r"\'S", r"Ś")
-    new_text = new_text.replace(r"\'U", r"Ú")
-    new_text = new_text.replace(r"\'W", r"Ẃ")
-    new_text = new_text.replace(r"\'Y", r"Ý")
-    new_text = new_text.replace(r"\'Z", r"Ź")
-    new_text = new_text.replace(r"\'{\a}", r"Á")
-    new_text = new_text.replace(r"\'{\c}", r"Ć")
-    new_text = new_text.replace(r"\'{\e}", r"É")
-    new_text = new_text.replace(r"\'{\G}", r"Ǵ")
-    new_text = new_text.replace(r"\'{\I}", r"Í")
-    new_text = new_text.replace(r"\'{\n}", r"Ń")
-    new_text = new_text.replace(r"\'{\O}", r"Ó")
-    new_text = new_text.replace(r"\'{\r}", r"Ŕ")
-    new_text = new_text.replace(r"\'{\S}", r"Ś")
-    new_text = new_text.replace(r"\'{\U}", r"Ú")
-    new_text = new_text.replace(r"\'{\W}", r"Ẃ")
-    new_text = new_text.replace(r"\'{\Y}", r"Ý")
-    new_text = new_text.replace(r"\'{\Z}", r"Ź")
-    new_text = new_text.replace(r"{\`{a}}", r"à")
-    new_text = new_text.replace(r"{\`{e}}", r"è")
-    new_text = new_text.replace(r"{\`{i}}", r"ì")
-    new_text = new_text.replace(r"{\`{o}}", r"ò")
-    new_text = new_text.replace(r"{\`{u}}", r"ù")
-    new_text = new_text.replace(r"{\`{\a}}", r"à")
-    new_text = new_text.replace(r"{\`{\e}}", r"è")
-    new_text = new_text.replace(r"{\`{\i}}", r"ì")
-    new_text = new_text.replace(r"{\`{\o}}", r"ò")
-    new_text = new_text.replace(r"{\`{\u}}", r"ù")
-    new_text = new_text.replace(r"{\` a}", r"à")
-    new_text = new_text.replace(r"{\` e}", r"è")
-    new_text = new_text.replace(r"{\` i}", r"ì")
-    new_text = new_text.replace(r"{\` o}", r"ò")
-    new_text = new_text.replace(r"{\` u}", r"ù")
-    new_text = new_text.replace(r"{\`a}", r"à")
-    new_text = new_text.replace(r"{\`e}", r"è")
-    new_text = new_text.replace(r"{\`i}", r"ì")
-    new_text = new_text.replace(r"{\`o}", r"ò")
-    new_text = new_text.replace(r"{\`u}", r"ù")
-    new_text = new_text.replace(r"{\`{A}}", r"À")
-    new_text = new_text.replace(r"{\`{E}}", r"È")
-    new_text = new_text.replace(r"{\`{I}}", r"Ì")
-    new_text = new_text.replace(r"{\`{O}}", r"Ò")
-    new_text = new_text.replace(r"{\`{U}}", r"Ù")
-    new_text = new_text.replace(r"{\`{\a}}", r"À")
-    new_text = new_text.replace(r"{\`{\e}}", r"È")
-    new_text = new_text.replace(r"{\`{\I}}", r"Ì")
-    new_text = new_text.replace(r"{\`{\O}}", r"Ò")
-    new_text = new_text.replace(r"{\`{\U}}", r"Ù")
-    new_text = new_text.replace(r"{\` A}", r"À")
-    new_text = new_text.replace(r"{\` E}", r"È")
-    new_text = new_text.replace(r"{\` I}", r"Ì")
-    new_text = new_text.replace(r"{\` O}", r"Ò")
-    new_text = new_text.replace(r"{\` U}", r"Ù")
-    new_text = new_text.replace(r"{\`A}", r"À")
-    new_text = new_text.replace(r"{\`E}", r"È")
-    new_text = new_text.replace(r"{\`I}", r"Ì")
-    new_text = new_text.replace(r"{\`O}", r"Ò")
-    new_text = new_text.replace(r"{\`U}", r"Ù")
-    new_text = new_text.replace(r"\`{a}", r"à")
-    new_text = new_text.replace(r"\`{e}", r"è")
-    new_text = new_text.replace(r"\`{i}", r"ì")
-    new_text = new_text.replace(r"\`{o}", r"ò")
-    new_text = new_text.replace(r"\`{u}", r"ù")
-    new_text = new_text.replace(r"\`a", r"à")
-    new_text = new_text.replace(r"\`e", r"è")
-    new_text = new_text.replace(r"\`i", r"ì")
-    new_text = new_text.replace(r"\`o", r"ò")
-    new_text = new_text.replace(r"\`u", r"ù")
-    new_text = new_text.replace(r"\`{\a}", r"à")
-    new_text = new_text.replace(r"\`{\e}", r"è")
-    new_text = new_text.replace(r"\`{\i}", r"ì")
-    new_text = new_text.replace(r"\`{\o}", r"ò")
-    new_text = new_text.replace(r"\`{\u}", r"ù")
-    new_text = new_text.replace(r"\`{A}", r"À")
-    new_text = new_text.replace(r"\`{E}", r"È")
-    new_text = new_text.replace(r"\`{I}", r"Ì")
-    new_text = new_text.replace(r"\`{O}", r"Ò")
-    new_text = new_text.replace(r"\`{U}", r"Ù")
-    new_text = new_text.replace(r"\`A", r"À")
-    new_text = new_text.replace(r"\`E", r"È")
-    new_text = new_text.replace(r"\`I", r"Ì")
-    new_text = new_text.replace(r"\`O", r"Ò")
-    new_text = new_text.replace(r"\`U", r"Ù")
-    new_text = new_text.replace(r"\`{\a}", r"À")
-    new_text = new_text.replace(r"\`{\e}", r"È")
-    new_text = new_text.replace(r"\`{\I}", r"Ì")
-    new_text = new_text.replace(r"\`{\O}", r"Ò")
-    new_text = new_text.replace(r"\`{\U}", r"Ù")
-    new_text = new_text.replace(r"{\^{a}}", r"â")
-    new_text = new_text.replace(r"{\^{c}}", r"ĉ")
-    new_text = new_text.replace(r"{\^{e}}", r"ê")
-    new_text = new_text.replace(r"{\^{g}}", r"ĝ")
-    new_text = new_text.replace(r"{\^{i}}", r"î")
-    new_text = new_text.replace(r"{\^{j}}", r"ĵ")
-    new_text = new_text.replace(r"{\^{o}}", r"ô")
-    new_text = new_text.replace(r"{\^{s}}", r"ŝ")
-    new_text = new_text.replace(r"{\^{u}}", r"û")
-    new_text = new_text.replace(r"{\^{\a}}", r"â")
-    new_text = new_text.replace(r"{\^{\c}}", r"ĉ")
-    new_text = new_text.replace(r"{\^{\e}}", r"ê")
-    new_text = new_text.replace(r"{\^{\g}}", r"ĝ")
-    new_text = new_text.replace(r"{\^{\i}}", r"î")
-    new_text = new_text.replace(r"{\^{\j}}", r"ĵ")
-    new_text = new_text.replace(r"{\^{\o}}", r"ô")
-    new_text = new_text.replace(r"{\^{\s}}", r"ŝ")
-    new_text = new_text.replace(r"{\^{\u}}", r"û")
-    new_text = new_text.replace(r"{\^ a}", r"â")
-    new_text = new_text.replace(r"{\^ c}", r"ĉ")
-    new_text = new_text.replace(r"{\^ e}", r"ê")
-    new_text = new_text.replace(r"{\^ g}", r"ĝ")
-    new_text = new_text.replace(r"{\^ i}", r"î")
-    new_text = new_text.replace(r"{\^ j}", r"ĵ")
-    new_text = new_text.replace(r"{\^ o}", r"ô")
-    new_text = new_text.replace(r"{\^ s}", r"ŝ")
-    new_text = new_text.replace(r"{\^ u}", r"û")
-    new_text = new_text.replace(r"{\^a}", r"â")
-    new_text = new_text.replace(r"{\^c}", r"ĉ")
-    new_text = new_text.replace(r"{\^e}", r"ê")
-    new_text = new_text.replace(r"{\^g}", r"ĝ")
-    new_text = new_text.replace(r"{\^i}", r"î")
-    new_text = new_text.replace(r"{\^j}", r"ĵ")
-    new_text = new_text.replace(r"{\^o}", r"ô")
-    new_text = new_text.replace(r"{\^s}", r"ŝ")
-    new_text = new_text.replace(r"{\^u}", r"û")
-    new_text = new_text.replace(r"{\^{A}}", r"Â")
-    new_text = new_text.replace(r"{\^{C}}", r"Ĉ")
-    new_text = new_text.replace(r"{\^{E}}", r"Ê")
-    new_text = new_text.replace(r"{\^{G}}", r"Ĝ")
-    new_text = new_text.replace(r"{\^{I}}", r"Î")
-    new_text = new_text.replace(r"{\^{J}}", r"Ĵ")
-    new_text = new_text.replace(r"{\^{O}}", r"Ô")
-    new_text = new_text.replace(r"{\^{S}}", r"Ŝ")
-    new_text = new_text.replace(r"{\^{U}}", r"Û")
-    new_text = new_text.replace(r"{\^{\a}}", r"Â")
-    new_text = new_text.replace(r"{\^{\c}}", r"Ĉ")
-    new_text = new_text.replace(r"{\^{\e}}", r"Ê")
-    new_text = new_text.replace(r"{\^{\G}}", r"Ĝ")
-    new_text = new_text.replace(r"{\^{\I}}", r"Î")
-    new_text = new_text.replace(r"{\^{\J}}", r"Ĵ")
-    new_text = new_text.replace(r"{\^{\O}}", r"Ô")
-    new_text = new_text.replace(r"{\^{\S}}", r"Ŝ")
-    new_text = new_text.replace(r"{\^{\U}}", r"Û")
-    new_text = new_text.replace(r"{\^ A}", r"Â")
-    new_text = new_text.replace(r"{\^ C}", r"Ĉ")
-    new_text = new_text.replace(r"{\^ E}", r"Ê")
-    new_text = new_text.replace(r"{\^ G}", r"Ĝ")
-    new_text = new_text.replace(r"{\^ I}", r"Î")
-    new_text = new_text.replace(r"{\^ J}", r"Ĵ")
-    new_text = new_text.replace(r"{\^ O}", r"Ô")
-    new_text = new_text.replace(r"{\^ S}", r"Ŝ")
-    new_text = new_text.replace(r"{\^ U}", r"Û")
-    new_text = new_text.replace(r"{\^A}", r"Â")
-    new_text = new_text.replace(r"{\^C}", r"Ĉ")
-    new_text = new_text.replace(r"{\^E}", r"Ê")
-    new_text = new_text.replace(r"{\^G}", r"Ĝ")
-    new_text = new_text.replace(r"{\^I}", r"Î")
-    new_text = new_text.replace(r"{\^J}", r"Ĵ")
-    new_text = new_text.replace(r"{\^O}", r"Ô")
-    new_text = new_text.replace(r"{\^S}", r"Ŝ")
-    new_text = new_text.replace(r"{\^U}", r"Û")
-    new_text = new_text.replace(r"\^{a}", r"â")
-    new_text = new_text.replace(r"\^{c}", r"ĉ")
-    new_text = new_text.replace(r"\^{e}", r"ê")
-    new_text = new_text.replace(r"\^{g}", r"ĝ")
-    new_text = new_text.replace(r"\^{i}", r"î")
-    new_text = new_text.replace(r"\^{j}", r"ĵ")
-    new_text = new_text.replace(r"\^{o}", r"ô")
-    new_text = new_text.replace(r"\^{s}", r"ŝ")
-    new_text = new_text.replace(r"\^{u}", r"û")
-    new_text = new_text.replace(r"\^a", r"â")
-    new_text = new_text.replace(r"\^c", r"ĉ")
-    new_text = new_text.replace(r"\^e", r"ê")
-    new_text = new_text.replace(r"\^g", r"ĝ")
-    new_text = new_text.replace(r"\^i", r"î")
-    new_text = new_text.replace(r"\^j", r"ĵ")
-    new_text = new_text.replace(r"\^o", r"ô")
-    new_text = new_text.replace(r"\^s", r"ŝ")
-    new_text = new_text.replace(r"\^u", r"û")
-    new_text = new_text.replace(r"\^{\a}", r"â")
-    new_text = new_text.replace(r"\^{\c}", r"ĉ")
-    new_text = new_text.replace(r"\^{\e}", r"ê")
-    new_text = new_text.replace(r"\^{\g}", r"ĝ")
-    new_text = new_text.replace(r"\^{\i}", r"î")
-    new_text = new_text.replace(r"\^{\j}", r"ĵ")
-    new_text = new_text.replace(r"\^{\o}", r"ô")
-    new_text = new_text.replace(r"\^{\s}", r"ŝ")
-    new_text = new_text.replace(r"\^{\u}", r"û")
-    new_text = new_text.replace(r"\^{A}", r"Â")
-    new_text = new_text.replace(r"\^{C}", r"Ĉ")
-    new_text = new_text.replace(r"\^{E}", r"Ê")
-    new_text = new_text.replace(r"\^{G}", r"Ĝ")
-    new_text = new_text.replace(r"\^{I}", r"Î")
-    new_text = new_text.replace(r"\^{J}", r"Ĵ")
-    new_text = new_text.replace(r"\^{O}", r"Ô")
-    new_text = new_text.replace(r"\^{S}", r"Ŝ")
-    new_text = new_text.replace(r"\^{U}", r"Û")
-    new_text = new_text.replace(r"\^A", r"Â")
-    new_text = new_text.replace(r"\^C", r"Ĉ")
-    new_text = new_text.replace(r"\^E", r"Ê")
-    new_text = new_text.replace(r"\^G", r"Ĝ")
-    new_text = new_text.replace(r"\^I", r"Î")
-    new_text = new_text.replace(r"\^J", r"Ĵ")
-    new_text = new_text.replace(r"\^O", r"Ô")
-    new_text = new_text.replace(r"\^S", r"Ŝ")
-    new_text = new_text.replace(r"\^U", r"Û")
-    new_text = new_text.replace(r"\^{\a}", r"Â")
-    new_text = new_text.replace(r"\^{\c}", r"Ĉ")
-    new_text = new_text.replace(r"\^{\e}", r"Ê")
-    new_text = new_text.replace(r"\^{\G}", r"Ĝ")
-    new_text = new_text.replace(r"\^{\I}", r"Î")
-    new_text = new_text.replace(r"\^{\J}", r"Ĵ")
-    new_text = new_text.replace(r"\^{\O}", r"Ô")
-    new_text = new_text.replace(r"\^{\S}", r"Ŝ")
-    new_text = new_text.replace(r"\^{\U}", r"Û")
-    new_text = new_text.replace(r"{\"{a}}", r"ä")
-    new_text = new_text.replace(r"{\"{e}}", r"ë")
-    new_text = new_text.replace(r"{\"{i}}", r"ï")
-    new_text = new_text.replace(r"{\"{o}}", r"ö")
-    new_text = new_text.replace(r"{\"{u}}", r"ü")
-    new_text = new_text.replace(r"{\"{\a}}", r"ä")
-    new_text = new_text.replace(r"{\"{\e}}", r"ë")
-    new_text = new_text.replace(r"{\"{\i}}", r"ï")
-    new_text = new_text.replace(r"{\"{\o}}", r"ö")
-    new_text = new_text.replace(r"{\"{\u}}", r"ü")
-    new_text = new_text.replace(r"{\" a}", r"ä")
-    new_text = new_text.replace(r"{\" e}", r"ë")
-    new_text = new_text.replace(r"{\" i}", r"ï")
-    new_text = new_text.replace(r"{\" o}", r"ö")
-    new_text = new_text.replace(r"{\" u}", r"ü")
-    new_text = new_text.replace(r"{\"a}", r"ä")
-    new_text = new_text.replace(r"{\"e}", r"ë")
-    new_text = new_text.replace(r"{\"i}", r"ï")
-    new_text = new_text.replace(r"{\"o}", r"ö")
-    new_text = new_text.replace(r"{\"u}", r"ü")
-    new_text = new_text.replace(r"{\"{A}}", r"Ä")
-    new_text = new_text.replace(r"{\"{E}}", r"Ë")
-    new_text = new_text.replace(r"{\"{I}}", r"Ï")
-    new_text = new_text.replace(r"{\"{O}}", r"Ö")
-    new_text = new_text.replace(r"{\"{U}}", r"Ü")
-    new_text = new_text.replace(r"{\"{\a}}", r"Ä")
-    new_text = new_text.replace(r"{\"{\e}}", r"Ë")
-    new_text = new_text.replace(r"{\"{\I}}", r"Ï")
-    new_text = new_text.replace(r"{\"{\O}}", r"Ö")
-    new_text = new_text.replace(r"{\"{\U}}", r"Ü")
-    new_text = new_text.replace(r"{\" A}", r"Ä")
-    new_text = new_text.replace(r"{\" E}", r"Ë")
-    new_text = new_text.replace(r"{\" I}", r"Ï")
-    new_text = new_text.replace(r"{\" O}", r"Ö")
-    new_text = new_text.replace(r"{\" U}", r"Ü")
-    new_text = new_text.replace(r"{\"A}", r"Ä")
-    new_text = new_text.replace(r"{\"E}", r"Ë")
-    new_text = new_text.replace(r"{\"I}", r"Ï")
-    new_text = new_text.replace(r"{\"O}", r"Ö")
-    new_text = new_text.replace(r"{\"U}", r"Ü")
-    new_text = new_text.replace(r"\"{a}", r"ä")
-    new_text = new_text.replace(r"\"{e}", r"ë")
-    new_text = new_text.replace(r"\"{i}", r"ï")
-    new_text = new_text.replace(r"\"{o}", r"ö")
-    new_text = new_text.replace(r"\"{u}", r"ü")
-    new_text = new_text.replace(r"\"a", r"ä")
-    new_text = new_text.replace(r"\"e", r"ë")
-    new_text = new_text.replace(r"\"i", r"ï")
-    new_text = new_text.replace(r"\"o", r"ö")
-    new_text = new_text.replace(r"\"u", r"ü")
-    new_text = new_text.replace(r"\"{\a}", r"ä")
-    new_text = new_text.replace(r"\"{\e}", r"ë")
-    new_text = new_text.replace(r"\"{\i}", r"ï")
-    new_text = new_text.replace(r"\"{\o}", r"ö")
-    new_text = new_text.replace(r"\"{\u}", r"ü")
-    new_text = new_text.replace(r"\"{A}", r"Ä")
-    new_text = new_text.replace(r"\"{E}", r"Ë")
-    new_text = new_text.replace(r"\"{I}", r"Ï")
-    new_text = new_text.replace(r"\"{O}", r"Ö")
-    new_text = new_text.replace(r"\"{U}", r"Ü")
-    new_text = new_text.replace(r"\"A", r"Ä")
-    new_text = new_text.replace(r"\"E", r"Ë")
-    new_text = new_text.replace(r"\"I", r"Ï")
-    new_text = new_text.replace(r"\"O", r"Ö")
-    new_text = new_text.replace(r"\"U", r"Ü")
-    new_text = new_text.replace(r"\"{\a}", r"Ä")
-    new_text = new_text.replace(r"\"{\e}", r"Ë")
-    new_text = new_text.replace(r"\"{\I}", r"Ï")
-    new_text = new_text.replace(r"\"{\O}", r"Ö")
-    new_text = new_text.replace(r"\"{\U}", r"Ü")
-    new_text = new_text.replace(r"{\={a}}", r"ā")
-    new_text = new_text.replace(r"{\={e}}", r"ē")
-    new_text = new_text.replace(r"{\={i}}", r"ī")
-    new_text = new_text.replace(r"{\={o}}", r"ō")
-    new_text = new_text.replace(r"{\={u}}", r"ū")
-    new_text = new_text.replace(r"{\={\a}}", r"ā")
-    new_text = new_text.replace(r"{\={\e}}", r"ē")
-    new_text = new_text.replace(r"{\={\i}}", r"ī")
-    new_text = new_text.replace(r"{\={\o}}", r"ō")
-    new_text = new_text.replace(r"{\={\u}}", r"ū")
-    new_text = new_text.replace(r"{\= a}", r"ā")
-    new_text = new_text.replace(r"{\= e}", r"ē")
-    new_text = new_text.replace(r"{\= i}", r"ī")
-    new_text = new_text.replace(r"{\= o}", r"ō")
-    new_text = new_text.replace(r"{\= u}", r"ū")
-    new_text = new_text.replace(r"{\=a}", r"ā")
-    new_text = new_text.replace(r"{\=e}", r"ē")
-    new_text = new_text.replace(r"{\=i}", r"ī")
-    new_text = new_text.replace(r"{\=o}", r"ō")
-    new_text = new_text.replace(r"{\=u}", r"ū")
-    new_text = new_text.replace(r"{\={A}}", r"Ā")
-    new_text = new_text.replace(r"{\={E}}", r"Ē")
-    new_text = new_text.replace(r"{\={I}}", r"Ī")
-    new_text = new_text.replace(r"{\={O}}", r"Ō")
-    new_text = new_text.replace(r"{\={U}}", r"Ū")
-    new_text = new_text.replace(r"{\={\a}}", r"Ā")
-    new_text = new_text.replace(r"{\={\e}}", r"Ē")
-    new_text = new_text.replace(r"{\={\I}}", r"Ī")
-    new_text = new_text.replace(r"{\={\O}}", r"Ō")
-    new_text = new_text.replace(r"{\={\U}}", r"Ū")
-    new_text = new_text.replace(r"{\= A}", r"Ā")
-    new_text = new_text.replace(r"{\= E}", r"Ē")
-    new_text = new_text.replace(r"{\= I}", r"Ī")
-    new_text = new_text.replace(r"{\= O}", r"Ō")
-    new_text = new_text.replace(r"{\= U}", r"Ū")
-    new_text = new_text.replace(r"{\=A}", r"Ā")
-    new_text = new_text.replace(r"{\=E}", r"Ē")
-    new_text = new_text.replace(r"{\=I}", r"Ī")
-    new_text = new_text.replace(r"{\=O}", r"Ō")
-    new_text = new_text.replace(r"{\=U}", r"Ū")
-    new_text = new_text.replace(r"\={a}", r"ā")
-    new_text = new_text.replace(r"\={e}", r"ē")
-    new_text = new_text.replace(r"\={i}", r"ī")
-    new_text = new_text.replace(r"\={o}", r"ō")
-    new_text = new_text.replace(r"\={u}", r"ū")
-    new_text = new_text.replace(r"\=a", r"ā")
-    new_text = new_text.replace(r"\=e", r"ē")
-    new_text = new_text.replace(r"\=i", r"ī")
-    new_text = new_text.replace(r"\=o", r"ō")
-    new_text = new_text.replace(r"\=u", r"ū")
-    new_text = new_text.replace(r"\={\a}", r"ā")
-    new_text = new_text.replace(r"\={\e}", r"ē")
-    new_text = new_text.replace(r"\={\i}", r"ī")
-    new_text = new_text.replace(r"\={\o}", r"ō")
-    new_text = new_text.replace(r"\={\u}", r"ū")
-    new_text = new_text.replace(r"\={A}", r"Ā")
-    new_text = new_text.replace(r"\={E}", r"Ē")
-    new_text = new_text.replace(r"\={I}", r"Ī")
-    new_text = new_text.replace(r"\={O}", r"Ō")
-    new_text = new_text.replace(r"\={U}", r"Ū")
-    new_text = new_text.replace(r"\=A", r"Ā")
-    new_text = new_text.replace(r"\=E", r"Ē")
-    new_text = new_text.replace(r"\=I", r"Ī")
-    new_text = new_text.replace(r"\=O", r"Ō")
-    new_text = new_text.replace(r"\=U", r"Ū")
-    new_text = new_text.replace(r"\={\a}", r"Ā")
-    new_text = new_text.replace(r"\={\e}", r"Ē")
-    new_text = new_text.replace(r"\={\I}", r"Ī")
-    new_text = new_text.replace(r"\={\O}", r"Ō")
-    new_text = new_text.replace(r"\={\U}", r"Ū")
-    new_text = new_text.replace(r"{\.{a}}", r"ȧ")
-    new_text = new_text.replace(r"{\.{c}}", r"ċ")
-    new_text = new_text.replace(r"{\.{e}}", r"ė")
-    new_text = new_text.replace(r"{\.{g}}", r"ġ")
-    new_text = new_text.replace(r"{\.{o}}", r"ȯ")
-    new_text = new_text.replace(r"{\.{z}}", r"ż")
-    new_text = new_text.replace(r"{\.{\a}}", r"ȧ")
-    new_text = new_text.replace(r"{\.{\c}}", r"ċ")
-    new_text = new_text.replace(r"{\.{\e}}", r"ė")
-    new_text = new_text.replace(r"{\.{\g}}", r"ġ")
-    new_text = new_text.replace(r"{\.{\o}}", r"ȯ")
-    new_text = new_text.replace(r"{\.{\z}}", r"ż")
-    new_text = new_text.replace(r"{\. a}", r"ȧ")
-    new_text = new_text.replace(r"{\. c}", r"ċ")
-    new_text = new_text.replace(r"{\. e}", r"ė")
-    new_text = new_text.replace(r"{\. g}", r"ġ")
-    new_text = new_text.replace(r"{\. o}", r"ȯ")
-    new_text = new_text.replace(r"{\. z}", r"ż")
-    new_text = new_text.replace(r"{\.a}", r"ȧ")
-    new_text = new_text.replace(r"{\.c}", r"ċ")
-    new_text = new_text.replace(r"{\.e}", r"ė")
-    new_text = new_text.replace(r"{\.g}", r"ġ")
-    new_text = new_text.replace(r"{\.o}", r"ȯ")
-    new_text = new_text.replace(r"{\.z}", r"ż")
-    new_text = new_text.replace(r"{\.{A}}", r"Ȧ")
-    new_text = new_text.replace(r"{\.{C}}", r"Ċ")
-    new_text = new_text.replace(r"{\.{E}}", r"Ė")
-    new_text = new_text.replace(r"{\.{G}}", r"Ġ")
-    new_text = new_text.replace(r"{\.{O}}", r"Ȯ")
-    new_text = new_text.replace(r"{\.{Z}}", r"Ż")
-    new_text = new_text.replace(r"{\.{\a}}", r"Ȧ")
-    new_text = new_text.replace(r"{\.{\c}}", r"Ċ")
-    new_text = new_text.replace(r"{\.{\e}}", r"Ė")
-    new_text = new_text.replace(r"{\.{\G}}", r"Ġ")
-    new_text = new_text.replace(r"{\.{\O}}", r"Ȯ")
-    new_text = new_text.replace(r"{\.{\Z}}", r"Ż")
-    new_text = new_text.replace(r"{\. A}", r"Ȧ")
-    new_text = new_text.replace(r"{\. C}", r"Ċ")
-    new_text = new_text.replace(r"{\. E}", r"Ė")
-    new_text = new_text.replace(r"{\. G}", r"Ġ")
-    new_text = new_text.replace(r"{\. O}", r"Ȯ")
-    new_text = new_text.replace(r"{\. Z}", r"Ż")
-    new_text = new_text.replace(r"{\.A}", r"Ȧ")
-    new_text = new_text.replace(r"{\.C}", r"Ċ")
-    new_text = new_text.replace(r"{\.E}", r"Ė")
-    new_text = new_text.replace(r"{\.G}", r"Ġ")
-    new_text = new_text.replace(r"{\.O}", r"Ȯ")
-    new_text = new_text.replace(r"{\.Z}", r"Ż")
-    new_text = new_text.replace(r"\.{a}", r"ȧ")
-    new_text = new_text.replace(r"\.{c}", r"ċ")
-    new_text = new_text.replace(r"\.{e}", r"ė")
-    new_text = new_text.replace(r"\.{g}", r"ġ")
-    new_text = new_text.replace(r"\.{o}", r"ȯ")
-    new_text = new_text.replace(r"\.{z}", r"ż")
-    new_text = new_text.replace(r"\.a", r"ȧ")
-    new_text = new_text.replace(r"\.c", r"ċ")
-    new_text = new_text.replace(r"\.e", r"ė")
-    new_text = new_text.replace(r"\.g", r"ġ")
-    new_text = new_text.replace(r"\.o", r"ȯ")
-    new_text = new_text.replace(r"\.z", r"ż")
-    new_text = new_text.replace(r"\.{\a}", r"ȧ")
-    new_text = new_text.replace(r"\.{\c}", r"ċ")
-    new_text = new_text.replace(r"\.{\e}", r"ė")
-    new_text = new_text.replace(r"\.{\g}", r"ġ")
-    new_text = new_text.replace(r"\.{\o}", r"ȯ")
-    new_text = new_text.replace(r"\.{\z}", r"ż")
-    new_text = new_text.replace(r"\.{A}", r"Ȧ")
-    new_text = new_text.replace(r"\.{C}", r"Ċ")
-    new_text = new_text.replace(r"\.{E}", r"Ė")
-    new_text = new_text.replace(r"\.{G}", r"Ġ")
-    new_text = new_text.replace(r"\.{O}", r"Ȯ")
-    new_text = new_text.replace(r"\.{Z}", r"Ż")
-    new_text = new_text.replace(r"\.A", r"Ȧ")
-    new_text = new_text.replace(r"\.C", r"Ċ")
-    new_text = new_text.replace(r"\.E", r"Ė")
-    new_text = new_text.replace(r"\.G", r"Ġ")
-    new_text = new_text.replace(r"\.O", r"Ȯ")
-    new_text = new_text.replace(r"\.Z", r"Ż")
-    new_text = new_text.replace(r"\.{\a}", r"Ȧ")
-    new_text = new_text.replace(r"\.{\c}", r"Ċ")
-    new_text = new_text.replace(r"\.{\e}", r"Ė")
-    new_text = new_text.replace(r"\.{\G}", r"Ġ")
-    new_text = new_text.replace(r"\.{\O}", r"Ȯ")
-    new_text = new_text.replace(r"\.{\Z}", r"Ż")
-    new_text = new_text.replace(r"{\d{a}}", r"ạ")
-    new_text = new_text.replace(r"{\d{e}}", r"ẹ")
-    new_text = new_text.replace(r"{\d{h}}", r"ḥ")
-    new_text = new_text.replace(r"{\d{i}}", r"ị")
-    new_text = new_text.replace(r"{\d{m}}", r"ṃ")
-    new_text = new_text.replace(r"{\d{n}}", r"ṇ")
-    new_text = new_text.replace(r"{\d{o}}", r"ọ")
-    new_text = new_text.replace(r"{\d{r}}", r"ṛ")
-    new_text = new_text.replace(r"{\d{s}}", r"ṣ")
-    new_text = new_text.replace(r"{\d{u}}", r"ụ")
-    new_text = new_text.replace(r"{\d{\a}}", r"ạ")
-    new_text = new_text.replace(r"{\d{\e}}", r"ẹ")
-    new_text = new_text.replace(r"{\d{\h}}", r"ḥ")
-    new_text = new_text.replace(r"{\d{\i}}", r"ị")
-    new_text = new_text.replace(r"{\d{\m}}", r"ṃ")
-    new_text = new_text.replace(r"{\d{\n}}", r"ṇ")
-    new_text = new_text.replace(r"{\d{\o}}", r"ọ")
-    new_text = new_text.replace(r"{\d{\r}}", r"ṛ")
-    new_text = new_text.replace(r"{\d{\s}}", r"ṣ")
-    new_text = new_text.replace(r"{\d{\u}}", r"ụ")
-    new_text = new_text.replace(r"{\d a}", r"ạ")
-    new_text = new_text.replace(r"{\d e}", r"ẹ")
-    new_text = new_text.replace(r"{\d h}", r"ḥ")
-    new_text = new_text.replace(r"{\d i}", r"ị")
-    new_text = new_text.replace(r"{\d m}", r"ṃ")
-    new_text = new_text.replace(r"{\d n}", r"ṇ")
-    new_text = new_text.replace(r"{\d o}", r"ọ")
-    new_text = new_text.replace(r"{\d r}", r"ṛ")
-    new_text = new_text.replace(r"{\d s}", r"ṣ")
-    new_text = new_text.replace(r"{\d u}", r"ụ")
-    new_text = new_text.replace(r"{\da}", r"ạ")
-    new_text = new_text.replace(r"{\de}", r"ẹ")
-    new_text = new_text.replace(r"{\dh}", r"ḥ")
-    new_text = new_text.replace(r"{\di}", r"ị")
-    new_text = new_text.replace(r"{\dm}", r"ṃ")
-    new_text = new_text.replace(r"{\dn}", r"ṇ")
-    new_text = new_text.replace(r"{\do}", r"ọ")
-    new_text = new_text.replace(r"{\dr}", r"ṛ")
-    new_text = new_text.replace(r"{\ds}", r"ṣ")
-    new_text = new_text.replace(r"{\du}", r"ụ")
-    new_text = new_text.replace(r"{\d{A}}", r"Ạ")
-    new_text = new_text.replace(r"{\d{E}}", r"Ẹ")
-    new_text = new_text.replace(r"{\d{H}}", r"Ḥ")
-    new_text = new_text.replace(r"{\d{I}}", r"Ị")
-    new_text = new_text.replace(r"{\d{M}}", r"Ṃ")
-    new_text = new_text.replace(r"{\d{N}}", r"Ṇ")
-    new_text = new_text.replace(r"{\d{O}}", r"Ọ")
-    new_text = new_text.replace(r"{\d{R}}", r"Ṛ")
-    new_text = new_text.replace(r"{\d{S}}", r"Ṣ")
-    new_text = new_text.replace(r"{\d{U}}", r"Ụ")
-    new_text = new_text.replace(r"{\d{\a}}", r"Ạ")
-    new_text = new_text.replace(r"{\d{\e}}", r"Ẹ")
-    new_text = new_text.replace(r"{\d{\H}}", r"Ḥ")
-    new_text = new_text.replace(r"{\d{\I}}", r"Ị")
-    new_text = new_text.replace(r"{\d{\M}}", r"Ṃ")
-    new_text = new_text.replace(r"{\d{\n}}", r"Ṇ")
-    new_text = new_text.replace(r"{\d{\O}}", r"Ọ")
-    new_text = new_text.replace(r"{\d{\r}}", r"Ṛ")
-    new_text = new_text.replace(r"{\d{\S}}", r"Ṣ")
-    new_text = new_text.replace(r"{\d{\U}}", r"Ụ")
-    new_text = new_text.replace(r"{\d A}", r"Ạ")
-    new_text = new_text.replace(r"{\d E}", r"Ẹ")
-    new_text = new_text.replace(r"{\d H}", r"Ḥ")
-    new_text = new_text.replace(r"{\d I}", r"Ị")
-    new_text = new_text.replace(r"{\d M}", r"Ṃ")
-    new_text = new_text.replace(r"{\d N}", r"Ṇ")
-    new_text = new_text.replace(r"{\d O}", r"Ọ")
-    new_text = new_text.replace(r"{\d R}", r"Ṛ")
-    new_text = new_text.replace(r"{\d S}", r"Ṣ")
-    new_text = new_text.replace(r"{\d U}", r"Ụ")
-    new_text = new_text.replace(r"{\dA}", r"Ạ")
-    new_text = new_text.replace(r"{\dE}", r"Ẹ")
-    new_text = new_text.replace(r"{\dH}", r"Ḥ")
-    new_text = new_text.replace(r"{\dI}", r"Ị")
-    new_text = new_text.replace(r"{\dM}", r"Ṃ")
-    new_text = new_text.replace(r"{\dN}", r"Ṇ")
-    new_text = new_text.replace(r"{\dO}", r"Ọ")
-    new_text = new_text.replace(r"{\dR}", r"Ṛ")
-    new_text = new_text.replace(r"{\dS}", r"Ṣ")
-    new_text = new_text.replace(r"{\dU}", r"Ụ")
-    new_text = new_text.replace(r"\d{a}", r"ạ")
-    new_text = new_text.replace(r"\d{e}", r"ẹ")
-    new_text = new_text.replace(r"\d{h}", r"ḥ")
-    new_text = new_text.replace(r"\d{i}", r"ị")
-    new_text = new_text.replace(r"\d{m}", r"ṃ")
-    new_text = new_text.replace(r"\d{n}", r"ṇ")
-    new_text = new_text.replace(r"\d{o}", r"ọ")
-    new_text = new_text.replace(r"\d{r}", r"ṛ")
-    new_text = new_text.replace(r"\d{s}", r"ṣ")
-    new_text = new_text.replace(r"\d{u}", r"ụ")
-    new_text = new_text.replace(r"\da", r"ạ")
-    new_text = new_text.replace(r"\de", r"ẹ")
-    new_text = new_text.replace(r"\dh", r"ḥ")
-    new_text = new_text.replace(r"\di", r"ị")
-    new_text = new_text.replace(r"\dm", r"ṃ")
-    new_text = new_text.replace(r"\dn", r"ṇ")
-    new_text = new_text.replace(r"\do", r"ọ")
-    new_text = new_text.replace(r"\dr", r"ṛ")
-    new_text = new_text.replace(r"\ds", r"ṣ")
-    new_text = new_text.replace(r"\du", r"ụ")
-    new_text = new_text.replace(r"\d{\a}", r"ạ")
-    new_text = new_text.replace(r"\d{\e}", r"ẹ")
-    new_text = new_text.replace(r"\d{\h}", r"ḥ")
-    new_text = new_text.replace(r"\d{\i}", r"ị")
-    new_text = new_text.replace(r"\d{\m}", r"ṃ")
-    new_text = new_text.replace(r"\d{\n}", r"ṇ")
-    new_text = new_text.replace(r"\d{\o}", r"ọ")
-    new_text = new_text.replace(r"\d{\r}", r"ṛ")
-    new_text = new_text.replace(r"\d{\s}", r"ṣ")
-    new_text = new_text.replace(r"\d{\u}", r"ụ")
-    new_text = new_text.replace(r"\d{A}", r"Ạ")
-    new_text = new_text.replace(r"\d{E}", r"Ẹ")
-    new_text = new_text.replace(r"\d{H}", r"Ḥ")
-    new_text = new_text.replace(r"\d{I}", r"Ị")
-    new_text = new_text.replace(r"\d{M}", r"Ṃ")
-    new_text = new_text.replace(r"\d{N}", r"Ṇ")
-    new_text = new_text.replace(r"\d{O}", r"Ọ")
-    new_text = new_text.replace(r"\d{R}", r"Ṛ")
-    new_text = new_text.replace(r"\d{S}", r"Ṣ")
-    new_text = new_text.replace(r"\d{U}", r"Ụ")
-    new_text = new_text.replace(r"\dA", r"Ạ")
-    new_text = new_text.replace(r"\dE", r"Ẹ")
-    new_text = new_text.replace(r"\dH", r"Ḥ")
-    new_text = new_text.replace(r"\dI", r"Ị")
-    new_text = new_text.replace(r"\dM", r"Ṃ")
-    new_text = new_text.replace(r"\dN", r"Ṇ")
-    new_text = new_text.replace(r"\dO", r"Ọ")
-    new_text = new_text.replace(r"\dR", r"Ṛ")
-    new_text = new_text.replace(r"\dS", r"Ṣ")
-    new_text = new_text.replace(r"\dU", r"Ụ")
-    new_text = new_text.replace(r"\d{\a}", r"Ạ")
-    new_text = new_text.replace(r"\d{\e}", r"Ẹ")
-    new_text = new_text.replace(r"\d{\H}", r"Ḥ")
-    new_text = new_text.replace(r"\d{\I}", r"Ị")
-    new_text = new_text.replace(r"\d{\M}", r"Ṃ")
-    new_text = new_text.replace(r"\d{\n}", r"Ṇ")
-    new_text = new_text.replace(r"\d{\O}", r"Ọ")
-    new_text = new_text.replace(r"\d{\r}", r"Ṛ")
-    new_text = new_text.replace(r"\d{\S}", r"Ṣ")
-    new_text = new_text.replace(r"\d{\U}", r"Ụ")
-    new_text = new_text.replace(r"{\u{a}}", r"ă")
-    new_text = new_text.replace(r"{\u{e}}", r"ĕ")
-    new_text = new_text.replace(r"{\u{g}}", r"ğ")
-    new_text = new_text.replace(r"{\u{i}}", r"ĭ")
-    new_text = new_text.replace(r"{\u{o}}", r"ŏ")
-    new_text = new_text.replace(r"{\u{u}}", r"ŭ")
-    new_text = new_text.replace(r"{\u{\a}}", r"ă")
-    new_text = new_text.replace(r"{\u{\e}}", r"ĕ")
-    new_text = new_text.replace(r"{\u{\g}}", r"ğ")
-    new_text = new_text.replace(r"{\u{\i}}", r"ĭ")
-    new_text = new_text.replace(r"{\u{\o}}", r"ŏ")
-    new_text = new_text.replace(r"{\u{\u}}", r"ŭ")
-    new_text = new_text.replace(r"{\u a}", r"ă")
-    new_text = new_text.replace(r"{\u e}", r"ĕ")
-    new_text = new_text.replace(r"{\u g}", r"ğ")
-    new_text = new_text.replace(r"{\u i}", r"ĭ")
-    new_text = new_text.replace(r"{\u o}", r"ŏ")
-    new_text = new_text.replace(r"{\u u}", r"ŭ")
-    new_text = new_text.replace(r"{\ua}", r"ă")
-    new_text = new_text.replace(r"{\ue}", r"ĕ")
-    new_text = new_text.replace(r"{\ug}", r"ğ")
-    new_text = new_text.replace(r"{\ui}", r"ĭ")
-    new_text = new_text.replace(r"{\uo}", r"ŏ")
-    new_text = new_text.replace(r"{\uu}", r"ŭ")
-    new_text = new_text.replace(r"{\u{A}}", r"Ă")
-    new_text = new_text.replace(r"{\u{E}}", r"Ĕ")
-    new_text = new_text.replace(r"{\u{G}}", r"Ğ")
-    new_text = new_text.replace(r"{\u{I}}", r"Ĭ")
-    new_text = new_text.replace(r"{\u{O}}", r"Ŏ")
-    new_text = new_text.replace(r"{\u{U}}", r"Ŭ")
-    new_text = new_text.replace(r"{\u{\a}}", r"Ă")
-    new_text = new_text.replace(r"{\u{\e}}", r"Ĕ")
-    new_text = new_text.replace(r"{\u{\G}}", r"Ğ")
-    new_text = new_text.replace(r"{\u{\I}}", r"Ĭ")
-    new_text = new_text.replace(r"{\u{\O}}", r"Ŏ")
-    new_text = new_text.replace(r"{\u{\U}}", r"Ŭ")
-    new_text = new_text.replace(r"{\u A}", r"Ă")
-    new_text = new_text.replace(r"{\u E}", r"Ĕ")
-    new_text = new_text.replace(r"{\u G}", r"Ğ")
-    new_text = new_text.replace(r"{\u I}", r"Ĭ")
-    new_text = new_text.replace(r"{\u O}", r"Ŏ")
-    new_text = new_text.replace(r"{\u U}", r"Ŭ")
-    new_text = new_text.replace(r"{\uA}", r"Ă")
-    new_text = new_text.replace(r"{\uE}", r"Ĕ")
-    new_text = new_text.replace(r"{\uG}", r"Ğ")
-    new_text = new_text.replace(r"{\uI}", r"Ĭ")
-    new_text = new_text.replace(r"{\uO}", r"Ŏ")
-    new_text = new_text.replace(r"{\uU}", r"Ŭ")
-    new_text = new_text.replace(r"\u{a}", r"ă")
-    new_text = new_text.replace(r"\u{e}", r"ĕ")
-    new_text = new_text.replace(r"\u{g}", r"ğ")
-    new_text = new_text.replace(r"\u{i}", r"ĭ")
-    new_text = new_text.replace(r"\u{o}", r"ŏ")
-    new_text = new_text.replace(r"\u{u}", r"ŭ")
-    new_text = new_text.replace(r"\ua", r"ă")
-    new_text = new_text.replace(r"\ue", r"ĕ")
-    new_text = new_text.replace(r"\ug", r"ğ")
-    new_text = new_text.replace(r"\ui", r"ĭ")
-    new_text = new_text.replace(r"\uo", r"ŏ")
-    new_text = new_text.replace(r"\uu", r"ŭ")
-    new_text = new_text.replace(r"\u{\a}", r"ă")
-    new_text = new_text.replace(r"\u{\e}", r"ĕ")
-    new_text = new_text.replace(r"\u{\g}", r"ğ")
-    new_text = new_text.replace(r"\u{\i}", r"ĭ")
-    new_text = new_text.replace(r"\u{\o}", r"ŏ")
-    new_text = new_text.replace(r"\u{\u}", r"ŭ")
-    new_text = new_text.replace(r"\u{A}", r"Ă")
-    new_text = new_text.replace(r"\u{E}", r"Ĕ")
-    new_text = new_text.replace(r"\u{G}", r"Ğ")
-    new_text = new_text.replace(r"\u{I}", r"Ĭ")
-    new_text = new_text.replace(r"\u{O}", r"Ŏ")
-    new_text = new_text.replace(r"\u{U}", r"Ŭ")
-    new_text = new_text.replace(r"\uA", r"Ă")
-    new_text = new_text.replace(r"\uE", r"Ĕ")
-    new_text = new_text.replace(r"\uG", r"Ğ")
-    new_text = new_text.replace(r"\uI", r"Ĭ")
-    new_text = new_text.replace(r"\uO", r"Ŏ")
-    new_text = new_text.replace(r"\uU", r"Ŭ")
-    new_text = new_text.replace(r"\u{\a}", r"Ă")
-    new_text = new_text.replace(r"\u{\e}", r"Ĕ")
-    new_text = new_text.replace(r"\u{\G}", r"Ğ")
-    new_text = new_text.replace(r"\u{\I}", r"Ĭ")
-    new_text = new_text.replace(r"\u{\O}", r"Ŏ")
-    new_text = new_text.replace(r"\u{\U}", r"Ŭ")
-    new_text = new_text.replace(r"{\H{o}}", r"ő")
-    new_text = new_text.replace(r"{\H{u}}", r"ű")
-    new_text = new_text.replace(r"{\H{\o}}", r"ő")
-    new_text = new_text.replace(r"{\H{\u}}", r"ű")
-    new_text = new_text.replace(r"{\H o}", r"ő")
-    new_text = new_text.replace(r"{\H u}", r"ű")
-    new_text = new_text.replace(r"{\Ho}", r"ő")
-    new_text = new_text.replace(r"{\Hu}", r"ű")
-    new_text = new_text.replace(r"{\H{O}}", r"Ő")
-    new_text = new_text.replace(r"{\H{U}}", r"Ű")
-    new_text = new_text.replace(r"{\H{\O}}", r"Ő")
-    new_text = new_text.replace(r"{\H{\U}}", r"Ű")
-    new_text = new_text.replace(r"{\H O}", r"Ő")
-    new_text = new_text.replace(r"{\H U}", r"Ű")
-    new_text = new_text.replace(r"{\HO}", r"Ő")
-    new_text = new_text.replace(r"{\HU}", r"Ű")
-    new_text = new_text.replace(r"\H{o}", r"ő")
-    new_text = new_text.replace(r"\H{u}", r"ű")
-    new_text = new_text.replace(r"\Ho", r"ő")
-    new_text = new_text.replace(r"\Hu", r"ű")
-    new_text = new_text.replace(r"\H{\o}", r"ő")
-    new_text = new_text.replace(r"\H{\u}", r"ű")
-    new_text = new_text.replace(r"\H{O}", r"Ő")
-    new_text = new_text.replace(r"\H{U}", r"Ű")
-    new_text = new_text.replace(r"\HO", r"Ő")
-    new_text = new_text.replace(r"\HU", r"Ű")
-    new_text = new_text.replace(r"\H{\O}", r"Ő")
-    new_text = new_text.replace(r"\H{\U}", r"Ű")
-    new_text = new_text.replace(r"a{\v}", r"â")
-    new_text = new_text.replace(r"A{\v}", r"Â")
-    new_text = new_text.replace(r"{\v{a}}", r"ǎ")
-    new_text = new_text.replace(r"{\v{\a}}", r"ǎ")
-    new_text = new_text.replace(r"{\v a}", r"ǎ")
-    new_text = new_text.replace(r"{\va}", r"ǎ")
-    new_text = new_text.replace(r"\v{a}", r"ǎ")
-    new_text = new_text.replace(r"\va", r"ǎ")
-    new_text = new_text.replace(r"\v{\a}", r"ǎ")
-    new_text = new_text.replace(r"{\v{A}}", r"Ǎ")
-    new_text = new_text.replace(r"{\v{\a}}", r"Ǎ")
-    new_text = new_text.replace(r"{\v A}", r"Ǎ")
-    new_text = new_text.replace(r"{\vA}", r"Ǎ")
-    new_text = new_text.replace(r"\v{A}", r"Ǎ")
-    new_text = new_text.replace(r"\vA", r"Ǎ")
-    new_text = new_text.replace(r"\v{\a}", r"Ǎ")
-    new_text = new_text.replace(r"{\v{c}}", r"č")
-    new_text = new_text.replace(r"{\v{\c}}", r"č")
-    new_text = new_text.replace(r"{\v c}", r"č")
-    new_text = new_text.replace(r"{\vc}", r"č")
-    new_text = new_text.replace(r"\v{c}", r"č")
-    new_text = new_text.replace(r"\vc", r"č")
-    new_text = new_text.replace(r"\v{\c}", r"č")
-    new_text = new_text.replace(r"{\v{C}}", r"Č")
-    new_text = new_text.replace(r"{\v{\c}}", r"Č")
-    new_text = new_text.replace(r"{\v C}", r"Č")
-    new_text = new_text.replace(r"{\vC}", r"Č")
-    new_text = new_text.replace(r"\v{C}", r"Č")
-    new_text = new_text.replace(r"\vC", r"Č")
-    new_text = new_text.replace(r"\v{\c}", r"Č")
-    new_text = new_text.replace(r"e{\v}", r"ê")
-    new_text = new_text.replace(r"{\v{e}}", r"ě")
-    new_text = new_text.replace(r"{\v{\e}}", r"ě")
-    new_text = new_text.replace(r"{\v e}", r"ě")
-    new_text = new_text.replace(r"{\ve}", r"ě")
-    new_text = new_text.replace(r"\v{e}", r"ě")
-    new_text = new_text.replace(r"\ve", r"ě")
-    new_text = new_text.replace(r"\v{\e}", r"ě")
-    new_text = new_text.replace(r"E{\v}", r"Ê")
-    new_text = new_text.replace(r"{\v{E}}", r"Ě")
-    new_text = new_text.replace(r"{\v{\e}}", r"Ě")
-    new_text = new_text.replace(r"{\v E}", r"Ě")
-    new_text = new_text.replace(r"{\vE}", r"Ě")
-    new_text = new_text.replace(r"\v{E}", r"Ě")
-    new_text = new_text.replace(r"\vE", r"Ě")
-    new_text = new_text.replace(r"\v{\e}", r"Ě")
-    new_text = new_text.replace(r"{\v{j}}", r"ǰ")
-    new_text = new_text.replace(r"{\v{\j}}", r"ǰ")
-    new_text = new_text.replace(r"{\v j}", r"ǰ")
-    new_text = new_text.replace(r"{\vj}", r"ǰ")
-    new_text = new_text.replace(r"\v{j}", r"ǰ")
-    new_text = new_text.replace(r"\vj", r"ǰ")
-    new_text = new_text.replace(r"\v{\j}", r"ǰ")
-    new_text = new_text.replace(r"{\v{r}}", r"ř")
-    new_text = new_text.replace(r"{\v{\r}}", r"ř")
-    new_text = new_text.replace(r"{\v r}", r"ř")
-    new_text = new_text.replace(r"{\vr}", r"ř")
-    new_text = new_text.replace(r"\v{r}", r"ř")
-    new_text = new_text.replace(r"\vr", r"ř")
-    new_text = new_text.replace(r"\v{\r}", r"ř")
-    new_text = new_text.replace(r"{\v{R}}", r"Ř")
-    new_text = new_text.replace(r"{\v{\r}}", r"Ř")
-    new_text = new_text.replace(r"{\v R}}", r"Ř")
-    new_text = new_text.replace(r"{\vR}}", r"Ř")
-    new_text = new_text.replace(r"\v{R}", r"Ř")
-    new_text = new_text.replace(r"\vR", r"Ř")
-    new_text = new_text.replace(r"\v{\r}", r"Ř")
-    new_text = new_text.replace(r"{\v{s}}", r"š")
-    new_text = new_text.replace(r"{\v{\s}}", r"š")
-    new_text = new_text.replace(r"{\v s}", r"š")
-    new_text = new_text.replace(r"{\vs}", r"š")
-    new_text = new_text.replace(r"\v{s}", r"š")
-    new_text = new_text.replace(r"\vs", r"š")
-    new_text = new_text.replace(r"\v{\s}", r"š")
-    new_text = new_text.replace(r"{\v{S}}", r"Š")
-    new_text = new_text.replace(r"{\v S}", r"Š")
-    new_text = new_text.replace(r"{\vS}", r"Š")
-    new_text = new_text.replace(r"{\v{\S}}", r"Š")
-    new_text = new_text.replace(r"\v{S}", r"Š")
-    new_text = new_text.replace(r"\vS", r"Š")
-    new_text = new_text.replace(r"\v{\S}", r"Š")
-    new_text = new_text.replace(r"{\v{z}}", r"ž")
-    new_text = new_text.replace(r"{\v{\z}}", r"ž")
-    new_text = new_text.replace(r"{\v z}", r"ž")
-    new_text = new_text.replace(r"{\vz}", r"ž")
-    new_text = new_text.replace(r"\v{z}", r"ž")
-    new_text = new_text.replace(r"\vz", r"ž")
-    new_text = new_text.replace(r"\v{\z}", r"ž")
-    new_text = new_text.replace(r"{\v{Z}}", r"Ž")
-    new_text = new_text.replace(r"{\v{\Z}}", r"Ž")
-    new_text = new_text.replace(r"{\v Z}", r"Ž")
-    new_text = new_text.replace(r"{\vZ}", r"Ž")
-    new_text = new_text.replace(r"\v{Z}", r"Ž")
-    new_text = new_text.replace(r"\vZ", r"Ž")
-    new_text = new_text.replace(r"\v{\Z}", r"Ž")
-    new_text = new_text.replace(r"{\c{s}}", r"ş")
-    new_text = new_text.replace(r"{\c{\s}}", r"ş")
-    new_text = new_text.replace(r"{\c s}", r"ş")
-    new_text = new_text.replace(r"\c{s}", r"ş")
-    new_text = new_text.replace(r"\cs", r"ş")
-    new_text = new_text.replace(r"\c{\s}", r"ş")
-    new_text = new_text.replace(r"s{\c}", r"ş")
-    new_text = new_text.replace(r"s{c}", r"ş")
-    new_text = new_text.replace(r"{\c{S}}", r"Ş")
-    new_text = new_text.replace(r"{\c{\S}}", r"Ş")
-    new_text = new_text.replace(r"{\c S}", r"Ş")
-    new_text = new_text.replace(r"{\cS}", r"Ş")
-    new_text = new_text.replace(r"\c{S}", r"Ş")
-    new_text = new_text.replace(r"\cS", r"Ş")
-    new_text = new_text.replace(r"\c{\S}", r"Ş")
-    new_text = new_text.replace(r"S{\c}", r"Ş")
-    new_text = new_text.replace(r"S{c}", r"Ş")
-    new_text = new_text.replace(r"{\c{e}}", r"ȩ")
-    new_text = new_text.replace(r"{\c{\e}}", r"ȩ")
-    new_text = new_text.replace(r"{\c e}", r"ȩ")
-    new_text = new_text.replace(r"{\ce}", r"ȩ")
-    new_text = new_text.replace(r"\c{e}", r"ȩ")
-    new_text = new_text.replace(r"\ce", r"ȩ")
-    new_text = new_text.replace(r"\c{\e}", r"ȩ")
-    new_text = new_text.replace(r"e{\c}", r"ȩ")
-    new_text = new_text.replace(r"e{c}", r"ȩ")
-    new_text = new_text.replace(r"{\c{E}}", r"Ȩ")
-    new_text = new_text.replace(r"{\c{\e}}", r"Ȩ")
-    new_text = new_text.replace(r"{\c E}", r"Ȩ")
-    new_text = new_text.replace(r"{\cE}", r"Ȩ")
-    new_text = new_text.replace(r"\c{E}", r"Ȩ")
-    new_text = new_text.replace(r"\cE", r"Ȩ")
-    new_text = new_text.replace(r"\c{\e}", r"Ȩ")
-    new_text = new_text.replace(r"E{\c}", r"Ȩ")
-    new_text = new_text.replace(r"E{c}", r"Ȩ")
-    new_text = new_text.replace(r"{\c{c}}", r"ç")
-    new_text = new_text.replace(r"{\c{\c}}", r"ç")
-    new_text = new_text.replace(r"{\c c}", r"ç")
-    new_text = new_text.replace(r"{\cc}", r"ç")
-    new_text = new_text.replace(r"\c{c}", r"ç")
-    new_text = new_text.replace(r"\cc", r"ç")
-    new_text = new_text.replace(r"\c{\c}", r"ç")
-    new_text = new_text.replace(r"c{\c}", r"ç")
-    new_text = new_text.replace(r"c{c}", r"ç")
-    new_text = new_text.replace(r"{\c{C}}", r"Ç")
-    new_text = new_text.replace(r"{\c{\c}}", r"Ç")
-    new_text = new_text.replace(r"{\c C}", r"Ç")
-    new_text = new_text.replace(r"{\cC}", r"Ç")
-    new_text = new_text.replace(r"\c{C}", r"Ç")
-    new_text = new_text.replace(r"\cC", r"Ç")
-    new_text = new_text.replace(r"\c{\c}", r"Ç")
-    new_text = new_text.replace(r"C{\c}", r"Ç")
-    new_text = new_text.replace(r"C{c}", r"Ç")
-    new_text = new_text.replace(r"{\~{a}}", r"ã")
-    new_text = new_text.replace(r"{\~{o}}", r"õ")
-    new_text = new_text.replace(r"{\~{\a}}", r"ã")
-    new_text = new_text.replace(r"{\~{\o}}", r"õ")
-    new_text = new_text.replace(r"{\~ a}", r"ã")
-    new_text = new_text.replace(r"{\~ o}", r"õ")
-    new_text = new_text.replace(r"{\~a}", r"ã")
-    new_text = new_text.replace(r"{\~o}", r"õ")
-    new_text = new_text.replace(r"{\~{A}}", r"Ã")
-    new_text = new_text.replace(r"{\~{O}}", r"Õ")
-    new_text = new_text.replace(r"{\~{\a}}", r"Ã")
-    new_text = new_text.replace(r"{\~{\O}}", r"Õ")
-    new_text = new_text.replace(r"{\~ A}", r"Ã")
-    new_text = new_text.replace(r"{\~ O}", r"Õ")
-    new_text = new_text.replace(r"{\~A}", r"Ã")
-    new_text = new_text.replace(r"{\~O}", r"Õ")
-    new_text = new_text.replace(r"\~{a}", r"ã")
-    new_text = new_text.replace(r"\~{o}", r"õ")
-    new_text = new_text.replace(r"\~a", r"ã")
-    new_text = new_text.replace(r"\~o", r"õ")
-    new_text = new_text.replace(r"\~{\a}", r"ã")
-    new_text = new_text.replace(r"\~{\o}", r"õ")
-    new_text = new_text.replace(r"\~{A}", r"Ã")
-    new_text = new_text.replace(r"\~{O}", r"Õ")
-    new_text = new_text.replace(r"\~A", r"Ã")
-    new_text = new_text.replace(r"\~O", r"Õ")
-    new_text = new_text.replace(r"\~{\a}", r"Ã")
-    new_text = new_text.replace(r"\~{\O}", r"Õ")
-    new_text = new_text.replace(r"{\~{n}}", r"ñ")
-    new_text = new_text.replace(r"{\~{\n}}", r"ñ")
-    new_text = new_text.replace(r"{\~ n}", r"ñ")
-    new_text = new_text.replace(r"{\~n}", r"ñ")
-    new_text = new_text.replace(r"\~{n}", r"ñ")
-    new_text = new_text.replace(r"\~n", r"ñ")
-    new_text = new_text.replace(r"\~{\n}", r"ñ")
-    new_text = new_text.replace(r"{\~{N}}", r"Ñ")
-    new_text = new_text.replace(r"{\~{\n}}", r"Ñ")
-    new_text = new_text.replace(r"{\~ N}", r"Ñ")
-    new_text = new_text.replace(r"{\~N}", r"Ñ")
-    new_text = new_text.replace(r"\~{N}", r"Ñ")
-    new_text = new_text.replace(r"\~N", r"Ñ")
-    new_text = new_text.replace(r"\~{\n}", r"Ñ")
-    new_text = new_text.replace(r"{\aa}", r"å")
-    new_text = new_text.replace(r"\aa", r"å")
-    new_text = new_text.replace(r"{\aA}", r"Å")
-    new_text = new_text.replace(r"\aA", r"Å")
-    new_text = new_text.replace(r"{\r{a}}", r"å")
-    new_text = new_text.replace(r"{\r{\a}}", r"å")
-    new_text = new_text.replace(r"{\r a}", r"å")
-    new_text = new_text.replace(r"{\ra}", r"å")
-    new_text = new_text.replace(r"\r{a}", r"å")
-    new_text = new_text.replace(r"\ra", r"å")
-    new_text = new_text.replace(r"\r{\a}", r"å")
-    new_text = new_text.replace(r"{\r{A}}", r"Å")
-    new_text = new_text.replace(r"{\r{\a}}", r"Å")
-    new_text = new_text.replace(r"{\r A}", r"Å")
-    new_text = new_text.replace(r"{\rA}", r"Å")
-    new_text = new_text.replace(r"\r{A}", r"Å")
-    new_text = new_text.replace(r"\rA", r"Å")
-    new_text = new_text.replace(r"\r{\a}", r"Å")
-    new_text = new_text.replace(r"{\r{u}}", r"ů")
-    new_text = new_text.replace(r"{\r{\u}}", r"ů")
-    new_text = new_text.replace(r"{\r u}", r"ů")
-    new_text = new_text.replace(r"{\ru}", r"ů")
-    new_text = new_text.replace(r"\r{u}", r"ů")
-    new_text = new_text.replace(r"\ru", r"ů")
-    new_text = new_text.replace(r"\r{\u}", r"ů")
-    new_text = new_text.replace(r"{\r{U}}", r"Ů")
-    new_text = new_text.replace(r"{\r{\U}}", r"Ů")
-    new_text = new_text.replace(r"{\r U}", r"Ů")
-    new_text = new_text.replace(r"{\rU}", r"Ů")
-    new_text = new_text.replace(r"\r{U}", r"Ů")
-    new_text = new_text.replace(r"\rU", r"Ů")
-    new_text = new_text.replace(r"\r{\U}", r"Ů")
-    new_text = new_text.replace(r"{\ae}", r"æ")
-    new_text = new_text.replace(r"\ae", r"æ")
-    new_text = new_text.replace(r"{\aE}", r"Æ")
-    new_text = new_text.replace(r"\aE", r"Æ")
-    new_text = new_text.replace(r"{\oe}", r"œ")
-    new_text = new_text.replace(r"\oe", r"œ")
-    new_text = new_text.replace(r"{\OE}", r"Œ")
-    new_text = new_text.replace(r"\OE", r"Œ")
-    new_text = new_text.replace(r"{\o}", r"ø")
-    new_text = new_text.replace(r"\o", r"ø")
-    new_text = new_text.replace(r"\o{}", r"ø")
-    new_text = new_text.replace(r"{\O}", r"Ø")
-    new_text = new_text.replace(r"\O", r"Ø")
-    new_text = new_text.replace(r"\O{}", r"Ø")
-    new_text = new_text.replace(r"{\ss}", r"ß")
-    new_text = new_text.replace(r"\ss", r"ß")
-    new_text = new_text.replace(r"{\l}", r"ł")
-    new_text = new_text.replace(r"\l", r"ł")
-    new_text = new_text.replace(r"{\L}", r"Ł")
-    new_text = new_text.replace(r"\L", r"Ł")
-    new_text = new_text.replace(r"{\i}", r"ı")
-    new_text = new_text.replace(r"\i", r"ı")
-    new_text = new_text.replace(r"{\textquotesingle}", r"'")
-    new_text = new_text.replace(r"\textquotesingle", r"'")
-    new_text = new_text.replace(r"{\textendash}", r"–")
-    new_text = new_text.replace(r"\textendash", r"–")
-    new_text = new_text.replace(r"{\textemdash}", r"—")
-    new_text = new_text.replace(r"\textemdash", r"—")
-    new_text = new_text.replace(r"{\textgreater}", r">")
-    new_text = new_text.replace(r"\textgreater", r">")
-    new_text = new_text.replace(r"{\textless}", r"<")
-    new_text = new_text.replace(r"\textless", r"<")
-    new_text = new_text.replace(r"{\textquoteright}", r"'")
-    new_text = new_text.replace(r"\textquoteright", r"'")
-    new_text = new_text.replace(r"{\textquoteleft}", r"'")
-    new_text = new_text.replace(r"\textquoteleft", r"'")
-    new_text = new_text.replace(r"{\textquotedblright}", r'"')
-    new_text = new_text.replace(r"\textquotedblright", r'"')
-    new_text = new_text.replace(r"{\textquotedblleft}", r'"')
-    new_text = new_text.replace(r"\textquotedblleft", r'"')
-    new_text = new_text.replace(r"{\\", r"")
-    new_text = new_text.replace("{\\", "")
-    new_text = new_text.replace(r"}", r"")
+def convert(text: Union[str, bytes]) -> str:
+    new_text = str(text)
+    for old, new in ESCAPE_LETTER_PAIRS:
+        new_text = new_text.replace(old, new)
     return new_text
+
+
+ESCAPE_LETTER_PAIRS = (
+    (r"{\'{a}}", r"á"),
+    (r"{\'{c}}", r"ć"),
+    (r"{\'{e}}", r"é"),
+    (r"{\'{g}}", r"ǵ"),
+    (r"{\'{i}}", r"í"),
+    (r"{\'{n}}", r"ń"),
+    (r"{\'{o}}", r"ó"),
+    (r"{\'{r}}", r"ŕ"),
+    (r"{\'{s}}", r"ś"),
+    (r"{\'{u}}", r"ú"),
+    (r"{\'{w}}", r"ẃ"),
+    (r"{\'{y}}", r"ý"),
+    (r"{\'{z}}", r"ź"),
+    (r"{\'{\a}}", r"á"),
+    (r"{\'{\c}}", r"ć"),
+    (r"{\'{\e}}", r"é"),
+    (r"{\'{\g}}", r"ǵ"),
+    (r"{\'{\i}}", r"í"),
+    (r"{\'{\n}}", r"ń"),
+    (r"{\'{\o}}", r"ó"),
+    (r"{\'{\r}}", r"ŕ"),
+    (r"{\'{\s}}", r"ś"),
+    (r"{\'{\u}}", r"ú"),
+    (r"{\'{\w}}", r"ẃ"),
+    (r"{\'{\y}}", r"ý"),
+    (r"{\'{\z}}", r"ź"),
+    (r"{\' a}", r"á"),
+    (r"{\' c}", r"ć"),
+    (r"{\' e}", r"é"),
+    (r"{\' g}", r"ǵ"),
+    (r"{\' i}", r"í"),
+    (r"{\' n}", r"ń"),
+    (r"{\' o}", r"ó"),
+    (r"{\' r}", r"ŕ"),
+    (r"{\' s}", r"ś"),
+    (r"{\' u}", r"ú"),
+    (r"{\' w}", r"ẃ"),
+    (r"{\' y}", r"ý"),
+    (r"{\' z}", r"ź"),
+    (r"{\'a}", r"á"),
+    (r"{\'c}", r"ć"),
+    (r"{\'e}", r"é"),
+    (r"{\'g}", r"ǵ"),
+    (r"{\'i}", r"í"),
+    (r"{\'n}", r"ń"),
+    (r"{\'o}", r"ó"),
+    (r"{\'r}", r"ŕ"),
+    (r"{\'s}", r"ś"),
+    (r"{\'u}", r"ú"),
+    (r"{\'w}", r"ẃ"),
+    (r"{\'y}", r"ý"),
+    (r"{\'z}", r"ź"),
+    (r"{\'{A}}", r"Á"),
+    (r"{\'{C}}", r"Ć"),
+    (r"{\'{E}}", r"É"),
+    (r"{\'{G}}", r"Ǵ"),
+    (r"{\'{I}}", r"Í"),
+    (r"{\'{N}}", r"Ń"),
+    (r"{\'{O}}", r"Ó"),
+    (r"{\'{R}}", r"Ŕ"),
+    (r"{\'{S}}", r"Ś"),
+    (r"{\'{U}}", r"Ú"),
+    (r"{\'{W}}", r"Ẃ"),
+    (r"{\'{Y}}", r"Ý"),
+    (r"{\'{Z}}", r"Ź"),
+    (r"{\'{\a}}", r"Á"),
+    (r"{\'{\c}}", r"Ć"),
+    (r"{\'{\e}}", r"É"),
+    (r"{\'{\G}}", r"Ǵ"),
+    (r"{\'{\I}}", r"Í"),
+    (r"{\'{\n}}", r"Ń"),
+    (r"{\'{\O}}", r"Ó"),
+    (r"{\'{\r}}", r"Ŕ"),
+    (r"{\'{\S}}", r"Ś"),
+    (r"{\'{\U}}", r"Ú"),
+    (r"{\'{\W}}", r"Ẃ"),
+    (r"{\'{\Y}}", r"Ý"),
+    (r"{\'{\Z}}", r"Ź"),
+    (r"{\' A}", r"Á"),
+    (r"{\' C}", r"Ć"),
+    (r"{\' E}", r"É"),
+    (r"{\' G}", r"Ǵ"),
+    (r"{\' I}", r"Í"),
+    (r"{\' N}", r"Ń"),
+    (r"{\' O}", r"Ó"),
+    (r"{\' R}", r"Ŕ"),
+    (r"{\' S}", r"Ś"),
+    (r"{\' U}", r"Ú"),
+    (r"{\' W}", r"Ẃ"),
+    (r"{\' Y}", r"Ý"),
+    (r"{\' Z}", r"Ź"),
+    (r"{\'A}", r"Á"),
+    (r"{\'C}", r"Ć"),
+    (r"{\'E}", r"É"),
+    (r"{\'G}", r"Ǵ"),
+    (r"{\'I}", r"Í"),
+    (r"{\'N}", r"Ń"),
+    (r"{\'O}", r"Ó"),
+    (r"{\'R}", r"Ŕ"),
+    (r"{\'S}", r"Ś"),
+    (r"{\'U}", r"Ú"),
+    (r"{\'W}", r"Ẃ"),
+    (r"{\'Y}", r"Ý"),
+    (r"{\'Z}", r"Ź"),
+    (r"\'{a}", r"á"),
+    (r"\'{c}", r"ć"),
+    (r"\'{e}", r"é"),
+    (r"\'{g}", r"ǵ"),
+    (r"\'{i}", r"í"),
+    (r"\'{n}", r"ń"),
+    (r"\'{o}", r"ó"),
+    (r"\'{r}", r"ŕ"),
+    (r"\'{s}", r"ś"),
+    (r"\'{u}", r"ú"),
+    (r"\'{w}", r"ẃ"),
+    (r"\'{y}", r"ý"),
+    (r"\'{z}", r"ź"),
+    (r"\'a", r"á"),
+    (r"\'c", r"ć"),
+    (r"\'e", r"é"),
+    (r"\'g", r"ǵ"),
+    (r"\'i", r"í"),
+    (r"\'n", r"ń"),
+    (r"\'o", r"ó"),
+    (r"\'r", r"ŕ"),
+    (r"\'s", r"ś"),
+    (r"\'u", r"ú"),
+    (r"\'w", r"ẃ"),
+    (r"\'y", r"ý"),
+    (r"\'z", r"ź"),
+    (r"\'{\a}", r"á"),
+    (r"\'{\c}", r"ć"),
+    (r"\'{\e}", r"é"),
+    (r"\'{\g}", r"ǵ"),
+    (r"\'{\i}", r"í"),
+    (r"\'{\n}", r"ń"),
+    (r"\'{\o}", r"ó"),
+    (r"\'{\r}", r"ŕ"),
+    (r"\'{\s}", r"ś"),
+    (r"\'{\u}", r"ú"),
+    (r"\'{\w}", r"ẃ"),
+    (r"\'{\y}", r"ý"),
+    (r"\'{\z}", r"ź"),
+    (r"\'{A}", r"Á"),
+    (r"\'{C}", r"Ć"),
+    (r"\'{E}", r"É"),
+    (r"\'{G}", r"Ǵ"),
+    (r"\'{I}", r"Í"),
+    (r"\'{N}", r"Ń"),
+    (r"\'{O}", r"Ó"),
+    (r"\'{R}", r"Ŕ"),
+    (r"\'{S}", r"Ś"),
+    (r"\'{U}", r"Ú"),
+    (r"\'{W}", r"Ẃ"),
+    (r"\'{Y}", r"Ý"),
+    (r"\'{Z}", r"Ź"),
+    (r"\'A", r"Á"),
+    (r"\'C", r"Ć"),
+    (r"\'E", r"É"),
+    (r"\'G", r"Ǵ"),
+    (r"\'I", r"Í"),
+    (r"\'N", r"Ń"),
+    (r"\'O", r"Ó"),
+    (r"\'R", r"Ŕ"),
+    (r"\'S", r"Ś"),
+    (r"\'U", r"Ú"),
+    (r"\'W", r"Ẃ"),
+    (r"\'Y", r"Ý"),
+    (r"\'Z", r"Ź"),
+    (r"\'{\a}", r"Á"),
+    (r"\'{\c}", r"Ć"),
+    (r"\'{\e}", r"É"),
+    (r"\'{\G}", r"Ǵ"),
+    (r"\'{\I}", r"Í"),
+    (r"\'{\n}", r"Ń"),
+    (r"\'{\O}", r"Ó"),
+    (r"\'{\r}", r"Ŕ"),
+    (r"\'{\S}", r"Ś"),
+    (r"\'{\U}", r"Ú"),
+    (r"\'{\W}", r"Ẃ"),
+    (r"\'{\Y}", r"Ý"),
+    (r"\'{\Z}", r"Ź"),
+    (r"{\`{a}}", r"à"),
+    (r"{\`{e}}", r"è"),
+    (r"{\`{i}}", r"ì"),
+    (r"{\`{o}}", r"ò"),
+    (r"{\`{u}}", r"ù"),
+    (r"{\`{\a}}", r"à"),
+    (r"{\`{\e}}", r"è"),
+    (r"{\`{\i}}", r"ì"),
+    (r"{\`{\o}}", r"ò"),
+    (r"{\`{\u}}", r"ù"),
+    (r"{\` a}", r"à"),
+    (r"{\` e}", r"è"),
+    (r"{\` i}", r"ì"),
+    (r"{\` o}", r"ò"),
+    (r"{\` u}", r"ù"),
+    (r"{\`a}", r"à"),
+    (r"{\`e}", r"è"),
+    (r"{\`i}", r"ì"),
+    (r"{\`o}", r"ò"),
+    (r"{\`u}", r"ù"),
+    (r"{\`{A}}", r"À"),
+    (r"{\`{E}}", r"È"),
+    (r"{\`{I}}", r"Ì"),
+    (r"{\`{O}}", r"Ò"),
+    (r"{\`{U}}", r"Ù"),
+    (r"{\`{\a}}", r"À"),
+    (r"{\`{\e}}", r"È"),
+    (r"{\`{\I}}", r"Ì"),
+    (r"{\`{\O}}", r"Ò"),
+    (r"{\`{\U}}", r"Ù"),
+    (r"{\` A}", r"À"),
+    (r"{\` E}", r"È"),
+    (r"{\` I}", r"Ì"),
+    (r"{\` O}", r"Ò"),
+    (r"{\` U}", r"Ù"),
+    (r"{\`A}", r"À"),
+    (r"{\`E}", r"È"),
+    (r"{\`I}", r"Ì"),
+    (r"{\`O}", r"Ò"),
+    (r"{\`U}", r"Ù"),
+    (r"\`{a}", r"à"),
+    (r"\`{e}", r"è"),
+    (r"\`{i}", r"ì"),
+    (r"\`{o}", r"ò"),
+    (r"\`{u}", r"ù"),
+    (r"\`a", r"à"),
+    (r"\`e", r"è"),
+    (r"\`i", r"ì"),
+    (r"\`o", r"ò"),
+    (r"\`u", r"ù"),
+    (r"\`{\a}", r"à"),
+    (r"\`{\e}", r"è"),
+    (r"\`{\i}", r"ì"),
+    (r"\`{\o}", r"ò"),
+    (r"\`{\u}", r"ù"),
+    (r"\`{A}", r"À"),
+    (r"\`{E}", r"È"),
+    (r"\`{I}", r"Ì"),
+    (r"\`{O}", r"Ò"),
+    (r"\`{U}", r"Ù"),
+    (r"\`A", r"À"),
+    (r"\`E", r"È"),
+    (r"\`I", r"Ì"),
+    (r"\`O", r"Ò"),
+    (r"\`U", r"Ù"),
+    (r"\`{\a}", r"À"),
+    (r"\`{\e}", r"È"),
+    (r"\`{\I}", r"Ì"),
+    (r"\`{\O}", r"Ò"),
+    (r"\`{\U}", r"Ù"),
+    (r"{\^{a}}", r"â"),
+    (r"{\^{c}}", r"ĉ"),
+    (r"{\^{e}}", r"ê"),
+    (r"{\^{g}}", r"ĝ"),
+    (r"{\^{i}}", r"î"),
+    (r"{\^{j}}", r"ĵ"),
+    (r"{\^{o}}", r"ô"),
+    (r"{\^{s}}", r"ŝ"),
+    (r"{\^{u}}", r"û"),
+    (r"{\^{\a}}", r"â"),
+    (r"{\^{\c}}", r"ĉ"),
+    (r"{\^{\e}}", r"ê"),
+    (r"{\^{\g}}", r"ĝ"),
+    (r"{\^{\i}}", r"î"),
+    (r"{\^{\j}}", r"ĵ"),
+    (r"{\^{\o}}", r"ô"),
+    (r"{\^{\s}}", r"ŝ"),
+    (r"{\^{\u}}", r"û"),
+    (r"{\^ a}", r"â"),
+    (r"{\^ c}", r"ĉ"),
+    (r"{\^ e}", r"ê"),
+    (r"{\^ g}", r"ĝ"),
+    (r"{\^ i}", r"î"),
+    (r"{\^ j}", r"ĵ"),
+    (r"{\^ o}", r"ô"),
+    (r"{\^ s}", r"ŝ"),
+    (r"{\^ u}", r"û"),
+    (r"{\^a}", r"â"),
+    (r"{\^c}", r"ĉ"),
+    (r"{\^e}", r"ê"),
+    (r"{\^g}", r"ĝ"),
+    (r"{\^i}", r"î"),
+    (r"{\^j}", r"ĵ"),
+    (r"{\^o}", r"ô"),
+    (r"{\^s}", r"ŝ"),
+    (r"{\^u}", r"û"),
+    (r"{\^{A}}", r"Â"),
+    (r"{\^{C}}", r"Ĉ"),
+    (r"{\^{E}}", r"Ê"),
+    (r"{\^{G}}", r"Ĝ"),
+    (r"{\^{I}}", r"Î"),
+    (r"{\^{J}}", r"Ĵ"),
+    (r"{\^{O}}", r"Ô"),
+    (r"{\^{S}}", r"Ŝ"),
+    (r"{\^{U}}", r"Û"),
+    (r"{\^{\a}}", r"Â"),
+    (r"{\^{\c}}", r"Ĉ"),
+    (r"{\^{\e}}", r"Ê"),
+    (r"{\^{\G}}", r"Ĝ"),
+    (r"{\^{\I}}", r"Î"),
+    (r"{\^{\J}}", r"Ĵ"),
+    (r"{\^{\O}}", r"Ô"),
+    (r"{\^{\S}}", r"Ŝ"),
+    (r"{\^{\U}}", r"Û"),
+    (r"{\^ A}", r"Â"),
+    (r"{\^ C}", r"Ĉ"),
+    (r"{\^ E}", r"Ê"),
+    (r"{\^ G}", r"Ĝ"),
+    (r"{\^ I}", r"Î"),
+    (r"{\^ J}", r"Ĵ"),
+    (r"{\^ O}", r"Ô"),
+    (r"{\^ S}", r"Ŝ"),
+    (r"{\^ U}", r"Û"),
+    (r"{\^A}", r"Â"),
+    (r"{\^C}", r"Ĉ"),
+    (r"{\^E}", r"Ê"),
+    (r"{\^G}", r"Ĝ"),
+    (r"{\^I}", r"Î"),
+    (r"{\^J}", r"Ĵ"),
+    (r"{\^O}", r"Ô"),
+    (r"{\^S}", r"Ŝ"),
+    (r"{\^U}", r"Û"),
+    (r"\^{a}", r"â"),
+    (r"\^{c}", r"ĉ"),
+    (r"\^{e}", r"ê"),
+    (r"\^{g}", r"ĝ"),
+    (r"\^{i}", r"î"),
+    (r"\^{j}", r"ĵ"),
+    (r"\^{o}", r"ô"),
+    (r"\^{s}", r"ŝ"),
+    (r"\^{u}", r"û"),
+    (r"\^a", r"â"),
+    (r"\^c", r"ĉ"),
+    (r"\^e", r"ê"),
+    (r"\^g", r"ĝ"),
+    (r"\^i", r"î"),
+    (r"\^j", r"ĵ"),
+    (r"\^o", r"ô"),
+    (r"\^s", r"ŝ"),
+    (r"\^u", r"û"),
+    (r"\^{\a}", r"â"),
+    (r"\^{\c}", r"ĉ"),
+    (r"\^{\e}", r"ê"),
+    (r"\^{\g}", r"ĝ"),
+    (r"\^{\i}", r"î"),
+    (r"\^{\j}", r"ĵ"),
+    (r"\^{\o}", r"ô"),
+    (r"\^{\s}", r"ŝ"),
+    (r"\^{\u}", r"û"),
+    (r"\^{A}", r"Â"),
+    (r"\^{C}", r"Ĉ"),
+    (r"\^{E}", r"Ê"),
+    (r"\^{G}", r"Ĝ"),
+    (r"\^{I}", r"Î"),
+    (r"\^{J}", r"Ĵ"),
+    (r"\^{O}", r"Ô"),
+    (r"\^{S}", r"Ŝ"),
+    (r"\^{U}", r"Û"),
+    (r"\^A", r"Â"),
+    (r"\^C", r"Ĉ"),
+    (r"\^E", r"Ê"),
+    (r"\^G", r"Ĝ"),
+    (r"\^I", r"Î"),
+    (r"\^J", r"Ĵ"),
+    (r"\^O", r"Ô"),
+    (r"\^S", r"Ŝ"),
+    (r"\^U", r"Û"),
+    (r"\^{\a}", r"Â"),
+    (r"\^{\c}", r"Ĉ"),
+    (r"\^{\e}", r"Ê"),
+    (r"\^{\G}", r"Ĝ"),
+    (r"\^{\I}", r"Î"),
+    (r"\^{\J}", r"Ĵ"),
+    (r"\^{\O}", r"Ô"),
+    (r"\^{\S}", r"Ŝ"),
+    (r"\^{\U}", r"Û"),
+    (r"{\"{a}}", r"ä"),
+    (r"{\"{e}}", r"ë"),
+    (r"{\"{i}}", r"ï"),
+    (r"{\"{o}}", r"ö"),
+    (r"{\"{u}}", r"ü"),
+    (r"{\"{\a}}", r"ä"),
+    (r"{\"{\e}}", r"ë"),
+    (r"{\"{\i}}", r"ï"),
+    (r"{\"{\o}}", r"ö"),
+    (r"{\"{\u}}", r"ü"),
+    (r"{\" a}", r"ä"),
+    (r"{\" e}", r"ë"),
+    (r"{\" i}", r"ï"),
+    (r"{\" o}", r"ö"),
+    (r"{\" u}", r"ü"),
+    (r"{\"a}", r"ä"),
+    (r"{\"e}", r"ë"),
+    (r"{\"i}", r"ï"),
+    (r"{\"o}", r"ö"),
+    (r"{\"u}", r"ü"),
+    (r"{\"{A}}", r"Ä"),
+    (r"{\"{E}}", r"Ë"),
+    (r"{\"{I}}", r"Ï"),
+    (r"{\"{O}}", r"Ö"),
+    (r"{\"{U}}", r"Ü"),
+    (r"{\"{\a}}", r"Ä"),
+    (r"{\"{\e}}", r"Ë"),
+    (r"{\"{\I}}", r"Ï"),
+    (r"{\"{\O}}", r"Ö"),
+    (r"{\"{\U}}", r"Ü"),
+    (r"{\" A}", r"Ä"),
+    (r"{\" E}", r"Ë"),
+    (r"{\" I}", r"Ï"),
+    (r"{\" O}", r"Ö"),
+    (r"{\" U}", r"Ü"),
+    (r"{\"A}", r"Ä"),
+    (r"{\"E}", r"Ë"),
+    (r"{\"I}", r"Ï"),
+    (r"{\"O}", r"Ö"),
+    (r"{\"U}", r"Ü"),
+    (r"\"{a}", r"ä"),
+    (r"\"{e}", r"ë"),
+    (r"\"{i}", r"ï"),
+    (r"\"{o}", r"ö"),
+    (r"\"{u}", r"ü"),
+    (r"\"a", r"ä"),
+    (r"\"e", r"ë"),
+    (r"\"i", r"ï"),
+    (r"\"o", r"ö"),
+    (r"\"u", r"ü"),
+    (r"\"{\a}", r"ä"),
+    (r"\"{\e}", r"ë"),
+    (r"\"{\i}", r"ï"),
+    (r"\"{\o}", r"ö"),
+    (r"\"{\u}", r"ü"),
+    (r"\"{A}", r"Ä"),
+    (r"\"{E}", r"Ë"),
+    (r"\"{I}", r"Ï"),
+    (r"\"{O}", r"Ö"),
+    (r"\"{U}", r"Ü"),
+    (r"\"A", r"Ä"),
+    (r"\"E", r"Ë"),
+    (r"\"I", r"Ï"),
+    (r"\"O", r"Ö"),
+    (r"\"U", r"Ü"),
+    (r"\"{\a}", r"Ä"),
+    (r"\"{\e}", r"Ë"),
+    (r"\"{\I}", r"Ï"),
+    (r"\"{\O}", r"Ö"),
+    (r"\"{\U}", r"Ü"),
+    (r"{\={a}}", r"ā"),
+    (r"{\={e}}", r"ē"),
+    (r"{\={i}}", r"ī"),
+    (r"{\={o}}", r"ō"),
+    (r"{\={u}}", r"ū"),
+    (r"{\={\a}}", r"ā"),
+    (r"{\={\e}}", r"ē"),
+    (r"{\={\i}}", r"ī"),
+    (r"{\={\o}}", r"ō"),
+    (r"{\={\u}}", r"ū"),
+    (r"{\= a}", r"ā"),
+    (r"{\= e}", r"ē"),
+    (r"{\= i}", r"ī"),
+    (r"{\= o}", r"ō"),
+    (r"{\= u}", r"ū"),
+    (r"{\=a}", r"ā"),
+    (r"{\=e}", r"ē"),
+    (r"{\=i}", r"ī"),
+    (r"{\=o}", r"ō"),
+    (r"{\=u}", r"ū"),
+    (r"{\={A}}", r"Ā"),
+    (r"{\={E}}", r"Ē"),
+    (r"{\={I}}", r"Ī"),
+    (r"{\={O}}", r"Ō"),
+    (r"{\={U}}", r"Ū"),
+    (r"{\={\a}}", r"Ā"),
+    (r"{\={\e}}", r"Ē"),
+    (r"{\={\I}}", r"Ī"),
+    (r"{\={\O}}", r"Ō"),
+    (r"{\={\U}}", r"Ū"),
+    (r"{\= A}", r"Ā"),
+    (r"{\= E}", r"Ē"),
+    (r"{\= I}", r"Ī"),
+    (r"{\= O}", r"Ō"),
+    (r"{\= U}", r"Ū"),
+    (r"{\=A}", r"Ā"),
+    (r"{\=E}", r"Ē"),
+    (r"{\=I}", r"Ī"),
+    (r"{\=O}", r"Ō"),
+    (r"{\=U}", r"Ū"),
+    (r"\={a}", r"ā"),
+    (r"\={e}", r"ē"),
+    (r"\={i}", r"ī"),
+    (r"\={o}", r"ō"),
+    (r"\={u}", r"ū"),
+    (r"\=a", r"ā"),
+    (r"\=e", r"ē"),
+    (r"\=i", r"ī"),
+    (r"\=o", r"ō"),
+    (r"\=u", r"ū"),
+    (r"\={\a}", r"ā"),
+    (r"\={\e}", r"ē"),
+    (r"\={\i}", r"ī"),
+    (r"\={\o}", r"ō"),
+    (r"\={\u}", r"ū"),
+    (r"\={A}", r"Ā"),
+    (r"\={E}", r"Ē"),
+    (r"\={I}", r"Ī"),
+    (r"\={O}", r"Ō"),
+    (r"\={U}", r"Ū"),
+    (r"\=A", r"Ā"),
+    (r"\=E", r"Ē"),
+    (r"\=I", r"Ī"),
+    (r"\=O", r"Ō"),
+    (r"\=U", r"Ū"),
+    (r"\={\a}", r"Ā"),
+    (r"\={\e}", r"Ē"),
+    (r"\={\I}", r"Ī"),
+    (r"\={\O}", r"Ō"),
+    (r"\={\U}", r"Ū"),
+    (r"{\.{a}}", r"ȧ"),
+    (r"{\.{c}}", r"ċ"),
+    (r"{\.{e}}", r"ė"),
+    (r"{\.{g}}", r"ġ"),
+    (r"{\.{o}}", r"ȯ"),
+    (r"{\.{z}}", r"ż"),
+    (r"{\.{\a}}", r"ȧ"),
+    (r"{\.{\c}}", r"ċ"),
+    (r"{\.{\e}}", r"ė"),
+    (r"{\.{\g}}", r"ġ"),
+    (r"{\.{\o}}", r"ȯ"),
+    (r"{\.{\z}}", r"ż"),
+    (r"{\. a}", r"ȧ"),
+    (r"{\. c}", r"ċ"),
+    (r"{\. e}", r"ė"),
+    (r"{\. g}", r"ġ"),
+    (r"{\. o}", r"ȯ"),
+    (r"{\. z}", r"ż"),
+    (r"{\.a}", r"ȧ"),
+    (r"{\.c}", r"ċ"),
+    (r"{\.e}", r"ė"),
+    (r"{\.g}", r"ġ"),
+    (r"{\.o}", r"ȯ"),
+    (r"{\.z}", r"ż"),
+    (r"{\.{A}}", r"Ȧ"),
+    (r"{\.{C}}", r"Ċ"),
+    (r"{\.{E}}", r"Ė"),
+    (r"{\.{G}}", r"Ġ"),
+    (r"{\.{O}}", r"Ȯ"),
+    (r"{\.{Z}}", r"Ż"),
+    (r"{\.{\a}}", r"Ȧ"),
+    (r"{\.{\c}}", r"Ċ"),
+    (r"{\.{\e}}", r"Ė"),
+    (r"{\.{\G}}", r"Ġ"),
+    (r"{\.{\O}}", r"Ȯ"),
+    (r"{\.{\Z}}", r"Ż"),
+    (r"{\. A}", r"Ȧ"),
+    (r"{\. C}", r"Ċ"),
+    (r"{\. E}", r"Ė"),
+    (r"{\. G}", r"Ġ"),
+    (r"{\. O}", r"Ȯ"),
+    (r"{\. Z}", r"Ż"),
+    (r"{\.A}", r"Ȧ"),
+    (r"{\.C}", r"Ċ"),
+    (r"{\.E}", r"Ė"),
+    (r"{\.G}", r"Ġ"),
+    (r"{\.O}", r"Ȯ"),
+    (r"{\.Z}", r"Ż"),
+    (r"\.{a}", r"ȧ"),
+    (r"\.{c}", r"ċ"),
+    (r"\.{e}", r"ė"),
+    (r"\.{g}", r"ġ"),
+    (r"\.{o}", r"ȯ"),
+    (r"\.{z}", r"ż"),
+    (r"\.a", r"ȧ"),
+    (r"\.c", r"ċ"),
+    (r"\.e", r"ė"),
+    (r"\.g", r"ġ"),
+    (r"\.o", r"ȯ"),
+    (r"\.z", r"ż"),
+    (r"\.{\a}", r"ȧ"),
+    (r"\.{\c}", r"ċ"),
+    (r"\.{\e}", r"ė"),
+    (r"\.{\g}", r"ġ"),
+    (r"\.{\o}", r"ȯ"),
+    (r"\.{\z}", r"ż"),
+    (r"\.{A}", r"Ȧ"),
+    (r"\.{C}", r"Ċ"),
+    (r"\.{E}", r"Ė"),
+    (r"\.{G}", r"Ġ"),
+    (r"\.{O}", r"Ȯ"),
+    (r"\.{Z}", r"Ż"),
+    (r"\.A", r"Ȧ"),
+    (r"\.C", r"Ċ"),
+    (r"\.E", r"Ė"),
+    (r"\.G", r"Ġ"),
+    (r"\.O", r"Ȯ"),
+    (r"\.Z", r"Ż"),
+    (r"\.{\a}", r"Ȧ"),
+    (r"\.{\c}", r"Ċ"),
+    (r"\.{\e}", r"Ė"),
+    (r"\.{\G}", r"Ġ"),
+    (r"\.{\O}", r"Ȯ"),
+    (r"\.{\Z}", r"Ż"),
+    (r"{\d{a}}", r"ạ"),
+    (r"{\d{e}}", r"ẹ"),
+    (r"{\d{h}}", r"ḥ"),
+    (r"{\d{i}}", r"ị"),
+    (r"{\d{m}}", r"ṃ"),
+    (r"{\d{n}}", r"ṇ"),
+    (r"{\d{o}}", r"ọ"),
+    (r"{\d{r}}", r"ṛ"),
+    (r"{\d{s}}", r"ṣ"),
+    (r"{\d{u}}", r"ụ"),
+    (r"{\d{\a}}", r"ạ"),
+    (r"{\d{\e}}", r"ẹ"),
+    (r"{\d{\h}}", r"ḥ"),
+    (r"{\d{\i}}", r"ị"),
+    (r"{\d{\m}}", r"ṃ"),
+    (r"{\d{\n}}", r"ṇ"),
+    (r"{\d{\o}}", r"ọ"),
+    (r"{\d{\r}}", r"ṛ"),
+    (r"{\d{\s}}", r"ṣ"),
+    (r"{\d{\u}}", r"ụ"),
+    (r"{\d a}", r"ạ"),
+    (r"{\d e}", r"ẹ"),
+    (r"{\d h}", r"ḥ"),
+    (r"{\d i}", r"ị"),
+    (r"{\d m}", r"ṃ"),
+    (r"{\d n}", r"ṇ"),
+    (r"{\d o}", r"ọ"),
+    (r"{\d r}", r"ṛ"),
+    (r"{\d s}", r"ṣ"),
+    (r"{\d u}", r"ụ"),
+    (r"{\da}", r"ạ"),
+    (r"{\de}", r"ẹ"),
+    (r"{\dh}", r"ḥ"),
+    (r"{\di}", r"ị"),
+    (r"{\dm}", r"ṃ"),
+    (r"{\dn}", r"ṇ"),
+    (r"{\do}", r"ọ"),
+    (r"{\dr}", r"ṛ"),
+    (r"{\ds}", r"ṣ"),
+    (r"{\du}", r"ụ"),
+    (r"{\d{A}}", r"Ạ"),
+    (r"{\d{E}}", r"Ẹ"),
+    (r"{\d{H}}", r"Ḥ"),
+    (r"{\d{I}}", r"Ị"),
+    (r"{\d{M}}", r"Ṃ"),
+    (r"{\d{N}}", r"Ṇ"),
+    (r"{\d{O}}", r"Ọ"),
+    (r"{\d{R}}", r"Ṛ"),
+    (r"{\d{S}}", r"Ṣ"),
+    (r"{\d{U}}", r"Ụ"),
+    (r"{\d{\a}}", r"Ạ"),
+    (r"{\d{\e}}", r"Ẹ"),
+    (r"{\d{\H}}", r"Ḥ"),
+    (r"{\d{\I}}", r"Ị"),
+    (r"{\d{\M}}", r"Ṃ"),
+    (r"{\d{\n}}", r"Ṇ"),
+    (r"{\d{\O}}", r"Ọ"),
+    (r"{\d{\r}}", r"Ṛ"),
+    (r"{\d{\S}}", r"Ṣ"),
+    (r"{\d{\U}}", r"Ụ"),
+    (r"{\d A}", r"Ạ"),
+    (r"{\d E}", r"Ẹ"),
+    (r"{\d H}", r"Ḥ"),
+    (r"{\d I}", r"Ị"),
+    (r"{\d M}", r"Ṃ"),
+    (r"{\d N}", r"Ṇ"),
+    (r"{\d O}", r"Ọ"),
+    (r"{\d R}", r"Ṛ"),
+    (r"{\d S}", r"Ṣ"),
+    (r"{\d U}", r"Ụ"),
+    (r"{\dA}", r"Ạ"),
+    (r"{\dE}", r"Ẹ"),
+    (r"{\dH}", r"Ḥ"),
+    (r"{\dI}", r"Ị"),
+    (r"{\dM}", r"Ṃ"),
+    (r"{\dN}", r"Ṇ"),
+    (r"{\dO}", r"Ọ"),
+    (r"{\dR}", r"Ṛ"),
+    (r"{\dS}", r"Ṣ"),
+    (r"{\dU}", r"Ụ"),
+    (r"\d{a}", r"ạ"),
+    (r"\d{e}", r"ẹ"),
+    (r"\d{h}", r"ḥ"),
+    (r"\d{i}", r"ị"),
+    (r"\d{m}", r"ṃ"),
+    (r"\d{n}", r"ṇ"),
+    (r"\d{o}", r"ọ"),
+    (r"\d{r}", r"ṛ"),
+    (r"\d{s}", r"ṣ"),
+    (r"\d{u}", r"ụ"),
+    (r"\da", r"ạ"),
+    (r"\de", r"ẹ"),
+    (r"\dh", r"ḥ"),
+    (r"\di", r"ị"),
+    (r"\dm", r"ṃ"),
+    (r"\dn", r"ṇ"),
+    (r"\do", r"ọ"),
+    (r"\dr", r"ṛ"),
+    (r"\ds", r"ṣ"),
+    (r"\du", r"ụ"),
+    (r"\d{\a}", r"ạ"),
+    (r"\d{\e}", r"ẹ"),
+    (r"\d{\h}", r"ḥ"),
+    (r"\d{\i}", r"ị"),
+    (r"\d{\m}", r"ṃ"),
+    (r"\d{\n}", r"ṇ"),
+    (r"\d{\o}", r"ọ"),
+    (r"\d{\r}", r"ṛ"),
+    (r"\d{\s}", r"ṣ"),
+    (r"\d{\u}", r"ụ"),
+    (r"\d{A}", r"Ạ"),
+    (r"\d{E}", r"Ẹ"),
+    (r"\d{H}", r"Ḥ"),
+    (r"\d{I}", r"Ị"),
+    (r"\d{M}", r"Ṃ"),
+    (r"\d{N}", r"Ṇ"),
+    (r"\d{O}", r"Ọ"),
+    (r"\d{R}", r"Ṛ"),
+    (r"\d{S}", r"Ṣ"),
+    (r"\d{U}", r"Ụ"),
+    (r"\dA", r"Ạ"),
+    (r"\dE", r"Ẹ"),
+    (r"\dH", r"Ḥ"),
+    (r"\dI", r"Ị"),
+    (r"\dM", r"Ṃ"),
+    (r"\dN", r"Ṇ"),
+    (r"\dO", r"Ọ"),
+    (r"\dR", r"Ṛ"),
+    (r"\dS", r"Ṣ"),
+    (r"\dU", r"Ụ"),
+    (r"\d{\a}", r"Ạ"),
+    (r"\d{\e}", r"Ẹ"),
+    (r"\d{\H}", r"Ḥ"),
+    (r"\d{\I}", r"Ị"),
+    (r"\d{\M}", r"Ṃ"),
+    (r"\d{\n}", r"Ṇ"),
+    (r"\d{\O}", r"Ọ"),
+    (r"\d{\r}", r"Ṛ"),
+    (r"\d{\S}", r"Ṣ"),
+    (r"\d{\U}", r"Ụ"),
+    (r"{\u{a}}", r"ă"),
+    (r"{\u{e}}", r"ĕ"),
+    (r"{\u{g}}", r"ğ"),
+    (r"{\u{i}}", r"ĭ"),
+    (r"{\u{o}}", r"ŏ"),
+    (r"{\u{u}}", r"ŭ"),
+    (r"{\u{\a}}", r"ă"),
+    (r"{\u{\e}}", r"ĕ"),
+    (r"{\u{\g}}", r"ğ"),
+    (r"{\u{\i}}", r"ĭ"),
+    (r"{\u{\o}}", r"ŏ"),
+    (r"{\u{\u}}", r"ŭ"),
+    (r"{\u a}", r"ă"),
+    (r"{\u e}", r"ĕ"),
+    (r"{\u g}", r"ğ"),
+    (r"{\u i}", r"ĭ"),
+    (r"{\u o}", r"ŏ"),
+    (r"{\u u}", r"ŭ"),
+    (r"{\ua}", r"ă"),
+    (r"{\ue}", r"ĕ"),
+    (r"{\ug}", r"ğ"),
+    (r"{\ui}", r"ĭ"),
+    (r"{\uo}", r"ŏ"),
+    (r"{\uu}", r"ŭ"),
+    (r"{\u{A}}", r"Ă"),
+    (r"{\u{E}}", r"Ĕ"),
+    (r"{\u{G}}", r"Ğ"),
+    (r"{\u{I}}", r"Ĭ"),
+    (r"{\u{O}}", r"Ŏ"),
+    (r"{\u{U}}", r"Ŭ"),
+    (r"{\u{\a}}", r"Ă"),
+    (r"{\u{\e}}", r"Ĕ"),
+    (r"{\u{\G}}", r"Ğ"),
+    (r"{\u{\I}}", r"Ĭ"),
+    (r"{\u{\O}}", r"Ŏ"),
+    (r"{\u{\U}}", r"Ŭ"),
+    (r"{\u A}", r"Ă"),
+    (r"{\u E}", r"Ĕ"),
+    (r"{\u G}", r"Ğ"),
+    (r"{\u I}", r"Ĭ"),
+    (r"{\u O}", r"Ŏ"),
+    (r"{\u U}", r"Ŭ"),
+    (r"{\uA}", r"Ă"),
+    (r"{\uE}", r"Ĕ"),
+    (r"{\uG}", r"Ğ"),
+    (r"{\uI}", r"Ĭ"),
+    (r"{\uO}", r"Ŏ"),
+    (r"{\uU}", r"Ŭ"),
+    (r"\u{a}", r"ă"),
+    (r"\u{e}", r"ĕ"),
+    (r"\u{g}", r"ğ"),
+    (r"\u{i}", r"ĭ"),
+    (r"\u{o}", r"ŏ"),
+    (r"\u{u}", r"ŭ"),
+    (r"\ua", r"ă"),
+    (r"\ue", r"ĕ"),
+    (r"\ug", r"ğ"),
+    (r"\ui", r"ĭ"),
+    (r"\uo", r"ŏ"),
+    (r"\uu", r"ŭ"),
+    (r"\u{\a}", r"ă"),
+    (r"\u{\e}", r"ĕ"),
+    (r"\u{\g}", r"ğ"),
+    (r"\u{\i}", r"ĭ"),
+    (r"\u{\o}", r"ŏ"),
+    (r"\u{\u}", r"ŭ"),
+    (r"\u{A}", r"Ă"),
+    (r"\u{E}", r"Ĕ"),
+    (r"\u{G}", r"Ğ"),
+    (r"\u{I}", r"Ĭ"),
+    (r"\u{O}", r"Ŏ"),
+    (r"\u{U}", r"Ŭ"),
+    (r"\uA", r"Ă"),
+    (r"\uE", r"Ĕ"),
+    (r"\uG", r"Ğ"),
+    (r"\uI", r"Ĭ"),
+    (r"\uO", r"Ŏ"),
+    (r"\uU", r"Ŭ"),
+    (r"\u{\a}", r"Ă"),
+    (r"\u{\e}", r"Ĕ"),
+    (r"\u{\G}", r"Ğ"),
+    (r"\u{\I}", r"Ĭ"),
+    (r"\u{\O}", r"Ŏ"),
+    (r"\u{\U}", r"Ŭ"),
+    (r"{\H{o}}", r"ő"),
+    (r"{\H{u}}", r"ű"),
+    (r"{\H{\o}}", r"ő"),
+    (r"{\H{\u}}", r"ű"),
+    (r"{\H o}", r"ő"),
+    (r"{\H u}", r"ű"),
+    (r"{\Ho}", r"ő"),
+    (r"{\Hu}", r"ű"),
+    (r"{\H{O}}", r"Ő"),
+    (r"{\H{U}}", r"Ű"),
+    (r"{\H{\O}}", r"Ő"),
+    (r"{\H{\U}}", r"Ű"),
+    (r"{\H O}", r"Ő"),
+    (r"{\H U}", r"Ű"),
+    (r"{\HO}", r"Ő"),
+    (r"{\HU}", r"Ű"),
+    (r"\H{o}", r"ő"),
+    (r"\H{u}", r"ű"),
+    (r"\Ho", r"ő"),
+    (r"\Hu", r"ű"),
+    (r"\H{\o}", r"ő"),
+    (r"\H{\u}", r"ű"),
+    (r"\H{O}", r"Ő"),
+    (r"\H{U}", r"Ű"),
+    (r"\HO", r"Ő"),
+    (r"\HU", r"Ű"),
+    (r"\H{\O}", r"Ő"),
+    (r"\H{\U}", r"Ű"),
+    (r"a{\v}", r"â"),
+    (r"A{\v}", r"Â"),
+    (r"{\v{a}}", r"ǎ"),
+    (r"{\v{\a}}", r"ǎ"),
+    (r"{\v a}", r"ǎ"),
+    (r"{\va}", r"ǎ"),
+    (r"\v{a}", r"ǎ"),
+    (r"\va", r"ǎ"),
+    (r"\v{\a}", r"ǎ"),
+    (r"{\v{A}}", r"Ǎ"),
+    (r"{\v{\a}}", r"Ǎ"),
+    (r"{\v A}", r"Ǎ"),
+    (r"{\vA}", r"Ǎ"),
+    (r"\v{A}", r"Ǎ"),
+    (r"\vA", r"Ǎ"),
+    (r"\v{\a}", r"Ǎ"),
+    (r"{\v{c}}", r"č"),
+    (r"{\v{\c}}", r"č"),
+    (r"{\v c}", r"č"),
+    (r"{\vc}", r"č"),
+    (r"\v{c}", r"č"),
+    (r"\vc", r"č"),
+    (r"\v{\c}", r"č"),
+    (r"{\v{C}}", r"Č"),
+    (r"{\v{\c}}", r"Č"),
+    (r"{\v C}", r"Č"),
+    (r"{\vC}", r"Č"),
+    (r"\v{C}", r"Č"),
+    (r"\vC", r"Č"),
+    (r"\v{\c}", r"Č"),
+    (r"e{\v}", r"ê"),
+    (r"{\v{e}}", r"ě"),
+    (r"{\v{\e}}", r"ě"),
+    (r"{\v e}", r"ě"),
+    (r"{\ve}", r"ě"),
+    (r"\v{e}", r"ě"),
+    (r"\ve", r"ě"),
+    (r"\v{\e}", r"ě"),
+    (r"E{\v}", r"Ê"),
+    (r"{\v{E}}", r"Ě"),
+    (r"{\v{\e}}", r"Ě"),
+    (r"{\v E}", r"Ě"),
+    (r"{\vE}", r"Ě"),
+    (r"\v{E}", r"Ě"),
+    (r"\vE", r"Ě"),
+    (r"\v{\e}", r"Ě"),
+    (r"{\v{j}}", r"ǰ"),
+    (r"{\v{\j}}", r"ǰ"),
+    (r"{\v j}", r"ǰ"),
+    (r"{\vj}", r"ǰ"),
+    (r"\v{j}", r"ǰ"),
+    (r"\vj", r"ǰ"),
+    (r"\v{\j}", r"ǰ"),
+    (r"{\v{r}}", r"ř"),
+    (r"{\v{\r}}", r"ř"),
+    (r"{\v r}", r"ř"),
+    (r"{\vr}", r"ř"),
+    (r"\v{r}", r"ř"),
+    (r"\vr", r"ř"),
+    (r"\v{\r}", r"ř"),
+    (r"{\v{R}}", r"Ř"),
+    (r"{\v{\r}}", r"Ř"),
+    (r"{\v R}}", r"Ř"),
+    (r"{\vR}}", r"Ř"),
+    (r"\v{R}", r"Ř"),
+    (r"\vR", r"Ř"),
+    (r"\v{\r}", r"Ř"),
+    (r"{\v{s}}", r"š"),
+    (r"{\v{\s}}", r"š"),
+    (r"{\v s}", r"š"),
+    (r"{\vs}", r"š"),
+    (r"\v{s}", r"š"),
+    (r"\vs", r"š"),
+    (r"\v{\s}", r"š"),
+    (r"{\v{S}}", r"Š"),
+    (r"{\v S}", r"Š"),
+    (r"{\vS}", r"Š"),
+    (r"{\v{\S}}", r"Š"),
+    (r"\v{S}", r"Š"),
+    (r"\vS", r"Š"),
+    (r"\v{\S}", r"Š"),
+    (r"{\v{z}}", r"ž"),
+    (r"{\v{\z}}", r"ž"),
+    (r"{\v z}", r"ž"),
+    (r"{\vz}", r"ž"),
+    (r"\v{z}", r"ž"),
+    (r"\vz", r"ž"),
+    (r"\v{\z}", r"ž"),
+    (r"{\v{Z}}", r"Ž"),
+    (r"{\v{\Z}}", r"Ž"),
+    (r"{\v Z}", r"Ž"),
+    (r"{\vZ}", r"Ž"),
+    (r"\v{Z}", r"Ž"),
+    (r"\vZ", r"Ž"),
+    (r"\v{\Z}", r"Ž"),
+    (r"{\c{s}}", r"ş"),
+    (r"{\c{\s}}", r"ş"),
+    (r"{\c s}", r"ş"),
+    (r"\c{s}", r"ş"),
+    (r"\cs", r"ş"),
+    (r"\c{\s}", r"ş"),
+    (r"s{\c}", r"ş"),
+    (r"s{c}", r"ş"),
+    (r"{\c{S}}", r"Ş"),
+    (r"{\c{\S}}", r"Ş"),
+    (r"{\c S}", r"Ş"),
+    (r"{\cS}", r"Ş"),
+    (r"\c{S}", r"Ş"),
+    (r"\cS", r"Ş"),
+    (r"\c{\S}", r"Ş"),
+    (r"S{\c}", r"Ş"),
+    (r"S{c}", r"Ş"),
+    (r"{\c{e}}", r"ȩ"),
+    (r"{\c{\e}}", r"ȩ"),
+    (r"{\c e}", r"ȩ"),
+    (r"{\ce}", r"ȩ"),
+    (r"\c{e}", r"ȩ"),
+    (r"\ce", r"ȩ"),
+    (r"\c{\e}", r"ȩ"),
+    (r"e{\c}", r"ȩ"),
+    (r"e{c}", r"ȩ"),
+    (r"{\c{E}}", r"Ȩ"),
+    (r"{\c{\e}}", r"Ȩ"),
+    (r"{\c E}", r"Ȩ"),
+    (r"{\cE}", r"Ȩ"),
+    (r"\c{E}", r"Ȩ"),
+    (r"\cE", r"Ȩ"),
+    (r"\c{\e}", r"Ȩ"),
+    (r"E{\c}", r"Ȩ"),
+    (r"E{c}", r"Ȩ"),
+    (r"{\c{c}}", r"ç"),
+    (r"{\c{\c}}", r"ç"),
+    (r"{\c c}", r"ç"),
+    (r"{\cc}", r"ç"),
+    (r"\c{c}", r"ç"),
+    (r"\cc", r"ç"),
+    (r"\c{\c}", r"ç"),
+    (r"c{\c}", r"ç"),
+    (r"c{c}", r"ç"),
+    (r"{\c{C}}", r"Ç"),
+    (r"{\c{\c}}", r"Ç"),
+    (r"{\c C}", r"Ç"),
+    (r"{\cC}", r"Ç"),
+    (r"\c{C}", r"Ç"),
+    (r"\cC", r"Ç"),
+    (r"\c{\c}", r"Ç"),
+    (r"C{\c}", r"Ç"),
+    (r"C{c}", r"Ç"),
+    (r"{\~{a}}", r"ã"),
+    (r"{\~{o}}", r"õ"),
+    (r"{\~{\a}}", r"ã"),
+    (r"{\~{\o}}", r"õ"),
+    (r"{\~ a}", r"ã"),
+    (r"{\~ o}", r"õ"),
+    (r"{\~a}", r"ã"),
+    (r"{\~o}", r"õ"),
+    (r"{\~{A}}", r"Ã"),
+    (r"{\~{O}}", r"Õ"),
+    (r"{\~{\a}}", r"Ã"),
+    (r"{\~{\O}}", r"Õ"),
+    (r"{\~ A}", r"Ã"),
+    (r"{\~ O}", r"Õ"),
+    (r"{\~A}", r"Ã"),
+    (r"{\~O}", r"Õ"),
+    (r"\~{a}", r"ã"),
+    (r"\~{o}", r"õ"),
+    (r"\~a", r"ã"),
+    (r"\~o", r"õ"),
+    (r"\~{\a}", r"ã"),
+    (r"\~{\o}", r"õ"),
+    (r"\~{A}", r"Ã"),
+    (r"\~{O}", r"Õ"),
+    (r"\~A", r"Ã"),
+    (r"\~O", r"Õ"),
+    (r"\~{\a}", r"Ã"),
+    (r"\~{\O}", r"Õ"),
+    (r"{\~{n}}", r"ñ"),
+    (r"{\~{\n}}", r"ñ"),
+    (r"{\~ n}", r"ñ"),
+    (r"{\~n}", r"ñ"),
+    (r"\~{n}", r"ñ"),
+    (r"\~n", r"ñ"),
+    (r"\~{\n}", r"ñ"),
+    (r"{\~{N}}", r"Ñ"),
+    (r"{\~{\n}}", r"Ñ"),
+    (r"{\~ N}", r"Ñ"),
+    (r"{\~N}", r"Ñ"),
+    (r"\~{N}", r"Ñ"),
+    (r"\~N", r"Ñ"),
+    (r"\~{\n}", r"Ñ"),
+    (r"{\aa}", r"å"),
+    (r"\aa", r"å"),
+    (r"{\aA}", r"Å"),
+    (r"\aA", r"Å"),
+    (r"{\r{a}}", r"å"),
+    (r"{\r{\a}}", r"å"),
+    (r"{\r a}", r"å"),
+    (r"{\ra}", r"å"),
+    (r"\r{a}", r"å"),
+    (r"\ra", r"å"),
+    (r"\r{\a}", r"å"),
+    (r"{\r{A}}", r"Å"),
+    (r"{\r{\a}}", r"Å"),
+    (r"{\r A}", r"Å"),
+    (r"{\rA}", r"Å"),
+    (r"\r{A}", r"Å"),
+    (r"\rA", r"Å"),
+    (r"\r{\a}", r"Å"),
+    (r"{\r{u}}", r"ů"),
+    (r"{\r{\u}}", r"ů"),
+    (r"{\r u}", r"ů"),
+    (r"{\ru}", r"ů"),
+    (r"\r{u}", r"ů"),
+    (r"\ru", r"ů"),
+    (r"\r{\u}", r"ů"),
+    (r"{\r{U}}", r"Ů"),
+    (r"{\r{\U}}", r"Ů"),
+    (r"{\r U}", r"Ů"),
+    (r"{\rU}", r"Ů"),
+    (r"\r{U}", r"Ů"),
+    (r"\rU", r"Ů"),
+    (r"\r{\U}", r"Ů"),
+    (r"{\ae}", r"æ"),
+    (r"\ae", r"æ"),
+    (r"{\aE}", r"Æ"),
+    (r"\aE", r"Æ"),
+    (r"{\oe}", r"œ"),
+    (r"\oe", r"œ"),
+    (r"{\OE}", r"Œ"),
+    (r"\OE", r"Œ"),
+    (r"{\o}", r"ø"),
+    (r"\o", r"ø"),
+    (r"\o{}", r"ø"),
+    (r"{\O}", r"Ø"),
+    (r"\O", r"Ø"),
+    (r"\O{}", r"Ø"),
+    (r"{\ss}", r"ß"),
+    (r"\ss", r"ß"),
+    (r"{\l}", r"ł"),
+    (r"\l", r"ł"),
+    (r"{\L}", r"Ł"),
+    (r"\L", r"Ł"),
+    (r"{\i}", r"ı"),
+    (r"\i", r"ı"),
+    (r"{\textquotesingle}", r"'"),
+    (r"\textquotesingle", r"'"),
+    (r"{\textendash}", r"–"),
+    (r"\textendash", r"–"),
+    (r"{\textemdash}", r"—"),
+    (r"\textemdash", r"—"),
+    (r"{\textgreater}", r">"),
+    (r"\textgreater", r">"),
+    (r"{\textless}", r"<"),
+    (r"\textless", r"<"),
+    (r"{\textquoteright}", r"'"),
+    (r"\textquoteright", r"'"),
+    (r"{\textquoteleft}", r"'"),
+    (r"\textquoteleft", r"'"),
+    (r"{\textquotedblright}", r'"'),
+    (r"\textquotedblright", r'"'),
+    (r"{\textquotedblleft}", r'"'),
+    (r"\textquotedblleft", r'"'),
+    (r"{\\", r""),
+    ("{\\", ""),
+    (r"}", r""),
+)
