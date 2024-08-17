@@ -14,6 +14,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
+from pybtex.database import Entry
 from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
 
 from bib2xml import __version__
@@ -59,6 +60,7 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
         type=Path,
         default=None,
         const=True,
+        nargs="?",
         help="output filename",
     )
     cli_parser.add_argument(
@@ -92,13 +94,18 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
         )
 
     for key, entry in bibdata.entries.items():
+        # typing
+        key: str
+        entry: Entry
+
         if args.debug:
             _logger.setLevel(DEBUG)
             _logger.debug(key)
+
         source = ET.SubElement(root, "b:Source")
         tag = ET.SubElement(source, "b:Tag")
         tag.text = key
-        b = bibdata.entries[key].fields
+        fields = entry.fields
 
         srctypes = {
             "book": "Book",
@@ -116,10 +123,12 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
         except KeyError:
             source.remove(srctype)
 
-        def add_element(source, tagname, keyname):
+        # HACK: グローバル変数を外に出すべき
+        def add_element(source: ET.Element, tagname: str, keyname: str):
+            _logger.debug(type(source))
             try:
                 tag = ET.SubElement(source, tagname)
-                tag.text = b[keyname]
+                tag.text = fields[keyname]
             except KeyError:
                 source.remove(tag)
             return source
@@ -150,7 +159,8 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
         authors0 = ET.SubElement(source, "b:Author")
         authors1 = ET.SubElement(authors0, "b:Author")
         namelist = ET.SubElement(authors1, "b:NameList")
-        for author in bibdata.entries[key].persons["author"]:
+        for author in entry.persons["author"]:
+            # HACK: typing
             person = ET.SubElement(namelist, "b:Person")
             first = ET.SubElement(person, "b:First")
             try:
