@@ -11,17 +11,18 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-import pybtext_conversion_helper
 from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
 
-parser = argparse.ArgumentParser()
-parser.add_argument(
+from bib2xml.helper import convert
+
+cli_parser = argparse.ArgumentParser()
+cli_parser.add_argument(
     "-a",
     "--append",
     dest="inxml",
     help="existing filename (e.g. Sources.xml) to append elements to",
 )
-parser.add_argument(
+cli_parser.add_argument(
     "-d",
     "--debug",
     dest="debug",
@@ -29,14 +30,14 @@ parser.add_argument(
     default=False,
     help="debug (useful for broken .bib entries)",
 )
-parser.add_argument(
+cli_parser.add_argument(
     "-i",
     "--input",
     dest="bibtexfile",
     type=Path,
     help="input bibtex filename",
 )
-parser.add_argument(
+cli_parser.add_argument(
     "-o",
     "--output",
     dest="xmlfile",
@@ -45,12 +46,12 @@ parser.add_argument(
     const=True,
     help="output filename",
 )
-options, args = parser.parse_args()
+args = cli_parser.parse_args()
 
-parser = bibtex.Parser()
+bib_parser = bibtex.Parser()
 
 try:
-    bibdata = parser.parse_file(options.bibtexfile)
+    bibdata = bib_parser.parse_file(args.bibtexfile)
 except NameError:
     print("Need an input filename. See --help", file=sys.stderr)
     sys.exit(1)
@@ -64,7 +65,7 @@ url_schema = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
 try:
     ET.register_namespace("", url_schema)
     ET.register_namespace("b", url_schema)
-    root = ET.parse(options.inxml).getroot()
+    root = ET.parse(args.inxml).getroot()
 except TypeError:
     root = ET.Element(
         "b:Sources",
@@ -72,7 +73,7 @@ except TypeError:
     )
 
 for key, entry in bibdata.entries.items():
-    if options.debug:
+    if args.debug:
         print(key)
     source = ET.SubElement(root, "b:Source")
     tag = ET.SubElement(source, "b:Tag")
@@ -141,12 +142,12 @@ for key, entry in bibdata.entries.items():
 
 # hack, unable to get register_namespace to work right when parsing the doc
 output = ET.tostring(root)
-output2 = pybtext_conversion_helper.convert(output)
+output2 = convert(output)
 # xml_file = ET.fromstring(output2)
 # tree = ET.ElementTree(xml_file)
 # tree.write("xml_output.xml")
 try:
-    with open(options.xmlfile, "wb") as f:
+    with open(args.xmlfile, "wb") as f:
         f.write(output2.encode("utf-8")[2:-1])
 except TypeError:
     print(output2)
