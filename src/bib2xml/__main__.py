@@ -14,7 +14,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-from pybtex.database import Entry
+from pybtex.database import Entry, Person
 from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
 
 from bib2xml import __version__
@@ -124,8 +124,9 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
             source.remove(srctype)
 
         # HACK: グローバル変数を外に出すべき
-        def add_element(source: ET.Element, tagname: str, keyname: str):
-            _logger.debug(type(source))
+        def add_element(
+            source: ET.Element, tagname: str, keyname: str
+        ) -> ET.Element:
             try:
                 tag = ET.SubElement(source, tagname)
                 tag.text = fields[keyname]
@@ -161,6 +162,8 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
         namelist = ET.SubElement(authors1, "b:NameList")
         for author in entry.persons["author"]:
             # HACK: typing
+            author: Person
+
             person = ET.SubElement(namelist, "b:Person")
             first = ET.SubElement(person, "b:First")
             try:
@@ -176,11 +179,18 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
     # xml_file = ET.fromstring(output2)
     # tree = ET.ElementTree(xml_file)
     # tree.write("xml_output.xml")
-    try:
+
+    if xmlfile:
+        if isinstance(xmlfile, Path):
+            if xmlfile.is_dir():
+                xmlfile /= bibtexfile.with_suffix(".xml").name
+        else:
+            xmlfile = bibtexfile.with_suffix(".xml")
+
         with open(xmlfile, mode="wb") as f:
             f.write(output2.encode("utf-8")[2:-1])
-    except TypeError:
-        print(output2)
+    else:
+        sys.stdout.write(output2 + "\n")
 
 
 def entrypoint() -> None:
