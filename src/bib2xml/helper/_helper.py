@@ -63,7 +63,6 @@ def add_element(
 
 def escape(text: str) -> str:
     new_text = str(text)
-    print(type(new_text))
     for old, new in ESCAPE_LETTER_PAIRS:
         new_text = new_text.replace(old, new)
     return new_text
