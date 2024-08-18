@@ -1,6 +1,5 @@
 import argparse
 import sys
-import xml.etree.cElementTree as ET
 from logging import DEBUG
 from pathlib import Path
 from typing import Optional, Union
@@ -14,19 +13,15 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-from pybtex.database import Entry, Person
 from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
 
 from bib2xml import __version__
-from bib2xml.helper import SRCTYPES, XLATE, add_element, convert
-from bib2xml.logging import get_child_logger
+from bib2xml.core import bib2xml
+from bib2xml.logging import get_root_logger
 
-_logger = get_child_logger(__name__)
+root_logger = get_root_logger()
 
 __all__ = ("main",)
-
-
-URL_SCHEMA = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
 
 
 def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
@@ -75,69 +70,17 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
     )
     args = cli_parser.parse_args(cli_args)
 
-    inxml: Optional[Path] = args.inxml
+    if args.debug:
+        root_logger.setLevel(DEBUG)
+
     bibtexfile: Path = args.bibtexfile
     xmlfile: Optional[Union[Path, Literal[True]]] = args.xmlfile
 
     bib_parser = bibtex.Parser()
-
     bibdata = bib_parser.parse_file(bibtexfile)
 
-    try:
-        ET.register_namespace("", URL_SCHEMA)
-        ET.register_namespace("b", URL_SCHEMA)
-        root = ET.parse(inxml).getroot()
-    except TypeError:
-        root = ET.Element(
-            "b:Sources",
-            {"xmlns:b": URL_SCHEMA},
-        )
-
-    for key, entry in bibdata.entries.items():
-        # typing
-        key: str
-        entry: Entry
-
-        if args.debug:
-            _logger.setLevel(DEBUG)
-            _logger.debug(key)
-
-        source = ET.SubElement(root, "b:Source")
-        tag = ET.SubElement(source, "b:Tag")
-        tag.text = key
-        fields = entry.fields
-
-        try:
-            srctype = ET.SubElement(source, "b:SourceType")
-            srctype.text = SRCTYPES.get(entry.type)
-        except KeyError:
-            source.remove(srctype)
-
-        for msft, bibft in XLATE:
-            source = add_element(source, msft, fields, bibft)
-
-        authors0 = ET.SubElement(source, "b:Author")
-        authors1 = ET.SubElement(authors0, "b:Author")
-        namelist = ET.SubElement(authors1, "b:NameList")
-        for author in entry.persons["author"]:
-            # HACK: typing
-            author: Person
-
-            person = ET.SubElement(namelist, "b:Person")
-            first = ET.SubElement(person, "b:First")
-            try:
-                first.text = author.first_names[0]
-            except IndexError:
-                first.text = ""
-            last = ET.SubElement(person, "b:Last")
-            last.text = author.last_names[0]
-
-    # hack, unable to get register_namespace to work right when parsing the doc
-    xml_bytes = ET.tostring(root)
-    xml_str = convert(xml_bytes)
-    # xml_file = ET.fromstring(output2)
-    # tree = ET.ElementTree(xml_file)
-    # tree.write("xml_output.xml")
+    # bib to xml
+    xml_str = bib2xml(bibdata, inxml=args.inxml)
 
     if xmlfile:
         if isinstance(xmlfile, Path):
