@@ -13,7 +13,7 @@ _logger = get_child_logger(__name__)
 URL_SCHEMA = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
 
 
-def bib2xml(bibdata: BibliographyData, inxml: Optional[Path]) -> str:
+def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
     if inxml is None:
         root = ET.Element(
             "b:Sources",
