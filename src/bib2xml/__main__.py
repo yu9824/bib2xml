@@ -26,6 +26,9 @@ _logger = get_child_logger(__name__)
 __all__ = ("main",)
 
 
+URL_SCHEMA = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
+
+
 def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
     cli_parser = argparse.ArgumentParser(
         prog=prog, description="convert .bib to .xml"
@@ -80,17 +83,14 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
 
     bibdata = bib_parser.parse_file(bibtexfile)
 
-    url_schema = (
-        "http://schemas.microsoft.com/office/word/2004/10/bibliography"
-    )
     try:
-        ET.register_namespace("", url_schema)
-        ET.register_namespace("b", url_schema)
+        ET.register_namespace("", URL_SCHEMA)
+        ET.register_namespace("b", URL_SCHEMA)
         root = ET.parse(inxml).getroot()
     except TypeError:
         root = ET.Element(
             "b:Sources",
-            {"xmlns:b": url_schema},
+            {"xmlns:b": URL_SCHEMA},
         )
 
     for key, entry in bibdata.entries.items():
