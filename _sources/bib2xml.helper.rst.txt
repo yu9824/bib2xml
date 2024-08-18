@@ -1,0 +1,7 @@
+bib2xml.helper package
+======================
+
+.. automodule:: bib2xml.helper
+   :members:
+   :undoc-members:
+   :show-inheritance:

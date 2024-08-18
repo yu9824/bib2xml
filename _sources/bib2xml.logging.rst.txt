@@ -1,0 +1,7 @@
+bib2xml.logging package
+=======================
+
+.. automodule:: bib2xml.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:

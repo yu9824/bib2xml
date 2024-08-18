@@ -1,0 +1,18 @@
+bib2xml package
+===============
+
+.. automodule:: bib2xml
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   bib2xml.core
+   bib2xml.helper
+   bib2xml.logging
+   bib2xml.utils

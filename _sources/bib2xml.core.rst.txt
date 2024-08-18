@@ -1,0 +1,7 @@
+bib2xml.core package
+====================
+
+.. automodule:: bib2xml.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
