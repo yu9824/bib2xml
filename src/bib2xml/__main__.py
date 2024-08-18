@@ -23,7 +23,7 @@ from bib2xml.logging import get_child_logger
 
 _logger = get_child_logger(__name__)
 
-__all__ = ["main"]
+__all__ = ("main",)
 
 
 def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
@@ -174,8 +174,8 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
             last.text = author.last_names[0]
 
     # hack, unable to get register_namespace to work right when parsing the doc
-    output = ET.tostring(root)
-    output2 = convert(output)
+    xml_bytes = ET.tostring(root)
+    xml_str = convert(xml_bytes)
     # xml_file = ET.fromstring(output2)
     # tree = ET.ElementTree(xml_file)
     # tree.write("xml_output.xml")
@@ -188,9 +188,9 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
             xmlfile = bibtexfile.with_suffix(".xml")
 
         with open(xmlfile, mode="wb") as f:
-            f.write(output2.encode("utf-8")[2:-1])
+            f.write(xml_str.encode("utf-8")[2:-1])
     else:
-        sys.stdout.write(output2 + "\n")
+        sys.stdout.write(xml_str + "\n")
 
 
 def entrypoint() -> None:
