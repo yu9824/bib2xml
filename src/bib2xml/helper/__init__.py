@@ -1,3 +1,3 @@
-from ._helper import SRCTYPES, XLATE, add_element, convert
+from ._helper import SRCTYPES, XLATE, add_element, escape
 
-__all__ = ("SRCTYPES", "convert", "add_element", "XLATE")
+__all__ = ("SRCTYPES", "XLATE", "add_element", "escape")

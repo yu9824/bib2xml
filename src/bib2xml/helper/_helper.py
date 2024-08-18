@@ -10,7 +10,6 @@ Modified on March 24 2023
 import sys
 import xml.etree.cElementTree as ET
 from types import MappingProxyType
-from typing import Union
 
 if sys.version_info >= (3, 9):
     from collections.abc import Mapping
@@ -62,8 +61,9 @@ def add_element(
     return source
 
 
-def convert(text: Union[str, bytes]) -> str:
+def escape(text: str) -> str:
     new_text = str(text)
+    print(type(new_text))
     for old, new in ESCAPE_LETTER_PAIRS:
         new_text = new_text.replace(old, new)
     return new_text
@@ -1190,3 +1190,6 @@ ESCAPE_LETTER_PAIRS = (
     ("{\\", ""),
     (r"}", r""),
 )
+
+if __name__ == "__main__":
+    escape(b"test")

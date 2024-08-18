@@ -4,7 +4,7 @@ from typing import Optional
 
 from pybtex.database import BibliographyData, Entry, Person
 
-from bib2xml.helper import SRCTYPES, XLATE, add_element, convert
+from bib2xml.helper import SRCTYPES, XLATE, add_element, escape
 from bib2xml.logging import get_child_logger
 
 _logger = get_child_logger(__name__)
@@ -63,4 +63,4 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
 
     # hack, unable to get register_namespace to work right when parsing the doc
     xml_bytes = ET.tostring(root)
-    return convert(xml_bytes)
+    return escape(xml_bytes.decode(encoding="utf-8"))
