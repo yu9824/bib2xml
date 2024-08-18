@@ -90,7 +90,7 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
             xmlfile = bibtexfile.with_suffix(".xml")
 
         with open(xmlfile, mode="wb") as f:
-            f.write(xml_str.encode("utf-8")[2:-1])
+            f.write(xml_str.encode("utf-8"))
     else:
         sys.stdout.write(xml_str + "\n")
 
