@@ -7,7 +7,59 @@ Modified on March 24 2023
 @author: yu9824
 """
 
+import sys
+import xml.etree.cElementTree as ET
+from types import MappingProxyType
 from typing import Union
+
+if sys.version_info >= (3, 9):
+    from collections.abc import Mapping
+else:
+    from typing import Mapping
+
+# mapping of MSFT tag to Bibtex field names
+XLATE: "tuple[tuple[str, str], ...]" = (
+    ("b:Title", "title"),
+    ("b:Year", "year"),
+    ("b:City", "city"),
+    ("b:Publisher", "publisher"),
+    ("b:ConferenceName", "organization"),
+    ("b:URL", "url"),
+    ("b:BookTitle", "booktitle"),
+    ("b:ChapterNumber", "chapter"),
+    ("b:Edition", "edition"),
+    ("b:Institution", "institution"),
+    ("b:JournalName", "journal"),
+    ("b:Month", "month"),
+    ("b:Volume", "volume"),
+    ("b:Issue", "number"),
+    ("b:Pages", "pages"),
+    ("b:Type", "type"),
+    ("b:URL", "howpublished"),
+)
+
+SRCTYPES = MappingProxyType(
+    {
+        "book": "Book",
+        "article": "JournalArticle",
+        "incollection": "ArticleInAPeriodical",
+        "inproceedings": "ConferenceProceedings",
+        "misc": "Misc",
+        "phdthesis": "Report",
+        "techreport": "Report",
+    }
+)
+
+
+def add_element(
+    source: ET.Element, tagname: str, fields: "Mapping[str, str]", keyname: str
+) -> ET.Element:
+    try:
+        tag = ET.SubElement(source, tagname)
+        tag.text = fields[keyname]
+    except KeyError:
+        source.remove(tag)
+    return source
 
 
 def convert(text: Union[str, bytes]) -> str:

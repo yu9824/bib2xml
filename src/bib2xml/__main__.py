@@ -18,7 +18,7 @@ from pybtex.database import Entry, Person
 from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
 
 from bib2xml import __version__
-from bib2xml.helper import convert
+from bib2xml.helper import SRCTYPES, XLATE, add_element, convert
 from bib2xml.logging import get_child_logger
 
 _logger = get_child_logger(__name__)
@@ -107,55 +107,14 @@ def main(cli_args: Sequence[str], prog: Optional[str] = None) -> None:
         tag.text = key
         fields = entry.fields
 
-        srctypes = {
-            "book": "Book",
-            "article": "JournalArticle",
-            "incollection": "ArticleInAPeriodical",
-            "inproceedings": "ConferenceProceedings",
-            "misc": "Misc",
-            "phdthesis": "Report",
-            "techreport": "Report",
-        }
-
         try:
             srctype = ET.SubElement(source, "b:SourceType")
-            srctype.text = srctypes.get(entry.type)
+            srctype.text = SRCTYPES.get(entry.type)
         except KeyError:
             source.remove(srctype)
 
-        # HACK: グローバル変数を外に出すべき
-        def add_element(
-            source: ET.Element, tagname: str, keyname: str
-        ) -> ET.Element:
-            try:
-                tag = ET.SubElement(source, tagname)
-                tag.text = fields[keyname]
-            except KeyError:
-                source.remove(tag)
-            return source
-
-        # mapping of MSFT tag to Bibtex field names
-        xlate = (
-            ("b:Title", "title"),
-            ("b:Year", "year"),
-            ("b:City", "city"),
-            ("b:Publisher", "publisher"),
-            ("b:ConferenceName", "organization"),
-            ("b:URL", "url"),
-            ("b:BookTitle", "booktitle"),
-            ("b:ChapterNumber", "chapter"),
-            ("b:Edition", "edition"),
-            ("b:Institution", "institution"),
-            ("b:JournalName", "journal"),
-            ("b:Month", "month"),
-            ("b:Volume", "volume"),
-            ("b:Issue", "number"),
-            ("b:Pages", "pages"),
-            ("b:Type", "type"),
-            ("b:URL", "howpublished"),
-        )
-        for msft, bibft in xlate:
-            source = add_element(source, msft, bibft)
+        for msft, bibft in XLATE:
+            source = add_element(source, msft, fields, bibft)
 
         authors0 = ET.SubElement(source, "b:Author")
         authors1 = ET.SubElement(authors0, "b:Author")
