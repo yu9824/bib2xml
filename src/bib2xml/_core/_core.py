@@ -2,7 +2,11 @@ import xml.etree.cElementTree as ET
 from pathlib import Path
 from typing import Optional
 
-from pybtex.database import BibliographyData, Entry, Person
+from pybtex.database import (  # type: ignore[import-untyped]
+    BibliographyData,
+    Entry,
+    Person,
+)
 
 from bib2xml.helper import SRCTYPES, XLATE, add_element, escape
 from bib2xml.logging import get_child_logger
