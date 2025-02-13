@@ -1,6 +1,6 @@
 """Processes Bibtex files (.bib), produces Word Bibliography XML (.xml) output
 
-Example
+Usage
 ========
 
 bash
