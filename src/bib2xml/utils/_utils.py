@@ -1,9 +1,10 @@
 import inspect
 import pkgutil
 import sys
+from typing import Any
 
 # deprecated in python >=3.12
-from typing import TypeVar
+from typing import TypeVar  # isort: skip
 
 if sys.version_info >= (3, 9):
     from collections.abc import Callable
@@ -48,5 +49,19 @@ def dummy_func(x: T, *args, **kwargs) -> T:
     return x
 
 
-def is_argument(_callable: Callable, arg_name: str) -> bool:
-    return arg_name in inspect.signature(_callable).parameters.keys()
+def is_argument(__callable: "Callable[..., Any]", arg_name: str) -> bool:
+    """Check to see if it is included in the callable argument.
+
+    Parameters
+    ----------
+    __callable : Callable
+
+    arg_name : str
+        argument name
+
+    Returns
+    -------
+    bool
+        if included, True
+    """
+    return arg_name in set(inspect.signature(__callable).parameters.keys())
