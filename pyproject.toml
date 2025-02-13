@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bib2xml"
 dynamic = ["version"]
-dependencies = ["typing-extensions >= 4.0.0; python_version < '3.8'", "pybtex"]
+dependencies = ["pybtex", "setuptools; python_version >= '3.12'"]
 requires-python = ">= 3.7"
 authors = [{ name = "yu9824" }]
 maintainers = [{ name = "yu9824" }]
@@ -28,7 +28,8 @@ classifiers = [
 
 [project.optional-dependencies]
 test = ["pytest"]
-dev = ["twine", "wheel", "build"]
+optional = ["colorlog"]
+dev = ["build"]
 docs = ["sphinx", "sphinx_rtd_theme", "sphinx-markdown-tables", "recommonmark"]
 gui = ["TkEasyGUI"]
 
