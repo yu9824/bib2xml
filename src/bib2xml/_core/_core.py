@@ -19,6 +19,33 @@ URL_SCHEMA = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
 
 
 def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
+    """Convert bibliography data into an XML formatted string.
+
+    Parameters
+    ----------
+    bibdata : BibliographyData
+        The bibliography data containing entries to be converted.
+    inxml : Path, optional
+        Path to an existing XML file to update. If None, a new XML structure is created.
+        Default is None.
+
+    Returns
+    -------
+    str
+        A string representation of the bibliography data in XML format.
+
+    Raises
+    ------
+    KeyError
+        If an entry type in `bibdata` does not have a corresponding source type in `SRCTYPES`.
+
+    Notes
+    -----
+    - The function converts `bibdata` into an XML format compatible with `URL_SCHEMA`.
+    - If `inxml` is provided, it attempts to parse and update the existing XML file.
+    - If a source type is missing from `SRCTYPES`, the corresponding `SourceType` element is omitted.
+    - Author names are extracted and structured under the `<b:Author>` tag.
+    """
     if inxml is None:
         root = ET.Element(
             "b:Sources",

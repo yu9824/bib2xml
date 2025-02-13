@@ -1,17 +1,17 @@
 """Processes Bibtex files (.bib), produces Word Bibliography XML (.xml) output
 
 Example
--------
+========
 
 bash
-^^^^
+-------
 
 .. code-block:: bash
 
     bib2xml -i bib-example.bib -o bib-example-xml.xml
 
 Python
-^^^^^^
+-------
 
 .. code-block:: python
 
