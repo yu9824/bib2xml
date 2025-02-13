@@ -36,6 +36,22 @@ XLATE: "tuple[tuple[str, str], ...]" = (
     ("b:Type", "type"),
     ("b:URL", "howpublished"),
 )
+"""
+Mapping of XML bibliographic field names to BibTeX-style field names.
+
+This tuple of tuples provides a predefined mapping between bibliographic XML element
+names (prefixed with `"b:"`) and their corresponding BibTeX-style field names.
+
+Each inner tuple contains:
+    - The XML element name as a string.
+    - The corresponding BibTeX-style field name as a string.
+
+Notes
+-----
+- This mapping is useful for converting XML-based bibliographic data to BibTeX format.
+- The `"b:URL"` field appears twice, mapping to both `"url"` and `"howpublished"`,
+  which may require special handling to avoid conflicts.
+"""
 
 SRCTYPES = MappingProxyType(
     {
@@ -48,11 +64,60 @@ SRCTYPES = MappingProxyType(
         "techreport": "Report",
     }
 )
+"""
+Mapping of source types to standardized reference types.
+
+This dictionary-like immutable mapping provides a conversion from common
+bibliographic source type keys to their corresponding standardized reference
+type names.
+
+Examples
+--------
+>>> SRCTYPES["book"]
+'Book'
+
+>>> SRCTYPES["article"]
+'JournalArticle'
+
+Notes
+-----
+This mapping is implemented using `MappingProxyType` to ensure that it is
+immutable and cannot be modified at runtime.
+
+Keys represent common BibTeX-like source types, and values represent their
+standardized reference type names.
+"""
 
 
 def add_element(
     source: ET.Element, tagname: str, fields: "Mapping[str, str]", keyname: str
 ) -> ET.Element:
+    """
+    Add a subelement to the given XML Element `source` with the specified `tagname`,
+    setting its text content from `fields[keyname]`.
+
+    Parameters
+    ----------
+    source : xml.etree.ElementTree.Element
+        The XML element to which the subelement will be added.
+    tagname : str
+        The tag name of the subelement to be created.
+    fields : Mapping[str, str]
+        A mapping containing the fields from which to extract the content.
+    keyname : str
+        The key in `fields` whose value will be used as the text content of the subelement.
+
+    Returns
+    -------
+    xml.etree.ElementTree.Element
+        The modified `source` element with the new subelement added.
+
+    Raises
+    ------
+    KeyError
+        If `keyname` is not found in `fields`, the subelement is not added and the
+        original `source` is returned without modifications.
+    """
     try:
         tag = ET.SubElement(source, tagname)
         tag.text = fields[keyname]
@@ -62,13 +127,36 @@ def add_element(
 
 
 def escape(text: str) -> str:
+    """
+    Replace specific characters in the input text based on predefined escape sequences.
+
+    This function converts the input text to a string and replaces occurrences of
+    specific characters according to the mappings defined in `ESCAPE_LETTER_PAIRS`.
+
+    Parameters
+    ----------
+    text : str
+        The input text to be escaped.
+
+    Returns
+    -------
+    str
+        The escaped text with specified characters replaced.
+
+    Notes
+    -----
+    - `ESCAPE_LETTER_PAIRS` must be defined as an iterable of `(old, new)` tuples
+      where `old` is the character or substring to be replaced and `new` is its
+      replacement.
+    - If `text` is not a string, it is first converted using `str(text)`.
+    """
     new_text = str(text)
     for old, new in ESCAPE_LETTER_PAIRS:
         new_text = new_text.replace(old, new)
     return new_text
 
 
-ESCAPE_LETTER_PAIRS = (
+ESCAPE_LETTER_PAIRS: "tuple[tuple[str, str], ...]" = (
     (r"{\'{a}}", r"á"),
     (r"{\'{c}}", r"ć"),
     (r"{\'{e}}", r"é"),
@@ -1189,6 +1277,11 @@ ESCAPE_LETTER_PAIRS = (
     ("{\\", ""),
     (r"}", r""),
 )
+"""
+`ESCAPE_LETTER_PAIRS` is defined as an iterable of `(old, new)` tuples
+      where `old` is the character or substring to be replaced and `new` is its
+      replacement.
+"""
 
 if __name__ == "__main__":
-    escape(b"test")
+    escape("test")
