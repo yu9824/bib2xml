@@ -24,11 +24,10 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
         ET.register_namespace("b", URL_SCHEMA)
         root = ET.parse(inxml).getroot()
 
+    # typing
+    key: str
+    entry: Entry
     for key, entry in bibdata.entries.items():
-        # typing
-        key: str
-        entry: Entry
-
         _logger.debug(key)
 
         source = ET.SubElement(root, "b:Source")
@@ -48,10 +47,10 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
         authors0 = ET.SubElement(source, "b:Author")
         authors1 = ET.SubElement(authors0, "b:Author")
         namelist = ET.SubElement(authors1, "b:NameList")
-        for author in entry.persons["author"]:
-            # HACK: typing
-            author: Person
 
+        # typing
+        author: Person
+        for author in entry.persons["author"]:
             person = ET.SubElement(namelist, "b:Person")
             first = ET.SubElement(person, "b:First")
             try:
