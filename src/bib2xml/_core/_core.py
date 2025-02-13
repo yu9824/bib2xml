@@ -8,7 +8,8 @@ from pybtex.database import (  # type: ignore[import-untyped]
     Person,
 )
 
-from bib2xml.helper import SRCTYPES, XLATE, add_element, escape
+from bib2xml.helper import add_element, escape
+from bib2xml.helper.constants import SRCTYPES, XLATE
 from bib2xml.logging import get_child_logger
 
 _logger = get_child_logger(__name__)
