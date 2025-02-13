@@ -13,10 +13,10 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-from pybtex.database.input import bibtex  # https://github.com/chbrown/pybtex
+# https://github.com/chbrown/pybtex
+from pybtex.database.input import bibtex
 
-from bib2xml import __version__
-from bib2xml.core import bib2xml
+from bib2xml import __version__, bib2xml
 from bib2xml.logging import get_root_logger
 
 root_logger = get_root_logger()
