@@ -8,10 +8,9 @@ from pybtex.database.input import bibtex  # type: ignore[import-untyped]
 from bib2xml import bib2xml
 
 # Get the project root directory (parent of tests directory)
-PROJECT_ROOT = Path(__file__).parent.parent
-EXAMPLES_DIR = PROJECT_ROOT / "examples"
-BIB_FILE = EXAMPLES_DIR / "bib-example.bib"
-XML_FILE = EXAMPLES_DIR / "bib-example.xml"
+TEST_ROOT_DIR = Path(__file__).parent.resolve()
+BIB_FILE = TEST_ROOT_DIR / "bib-example.bib"
+XML_FILE = TEST_ROOT_DIR / "bib-example.xml"
 
 
 def normalize_xml(xml_str: str) -> str:
