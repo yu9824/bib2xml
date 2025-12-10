@@ -159,8 +159,127 @@ def test_xml_source_tags_match():
     )
 
 
+def compare_xml_elements(
+    result_elem: ET.Element,
+    expected_elem: ET.Element,
+    path: str = "",
+) -> list[str]:
+    """Recursively compare XML elements and their hierarchical structure.
+
+    Parameters
+    ----------
+    result_elem : ET.Element
+        The result XML element to compare.
+    expected_elem : ET.Element
+        The expected XML element to compare against.
+    path : str
+        The current path in the XML hierarchy (for error messages).
+
+    Returns
+    -------
+    list[str]
+        List of error messages. Empty list if elements match.
+    """
+    errors = []
+    current_path = f"{path}/{result_elem.tag}" if path else result_elem.tag
+
+    # Compare tag names
+    if result_elem.tag != expected_elem.tag:
+        errors.append(
+            f"Tag mismatch at '{path}': '{result_elem.tag}' vs '{expected_elem.tag}'"
+        )
+        return errors
+
+    # Compare text content (normalize whitespace)
+    result_text = (result_elem.text or "").strip()
+    expected_text = (expected_elem.text or "").strip()
+    if result_text != expected_text:
+        errors.append(
+            f"Text content mismatch at '{current_path}': "
+            f"'{result_text}' vs '{expected_text}'"
+        )
+
+    # Compare tail content
+    result_tail = (result_elem.tail or "").strip()
+    expected_tail = (expected_elem.tail or "").strip()
+    if result_tail != expected_tail:
+        errors.append(
+            f"Tail content mismatch at '{current_path}': "
+            f"'{result_tail}' vs '{expected_tail}'"
+        )
+
+    # Compare attributes
+    if result_elem.attrib != expected_elem.attrib:
+        errors.append(
+            f"Attributes mismatch at '{current_path}': "
+            f"{result_elem.attrib} vs {expected_elem.attrib}"
+        )
+
+    # Compare child elements
+    result_children = list(result_elem)
+    expected_children = list(expected_elem)
+
+    # Group children by tag name
+    def group_by_tag(
+        elements: list[ET.Element],
+    ) -> dict[str, list[ET.Element]]:
+        grouped: dict[str, list[ET.Element]] = {}
+        for elem in elements:
+            tag = elem.tag
+            if tag not in grouped:
+                grouped[tag] = []
+            grouped[tag].append(elem)
+        return grouped
+
+    result_grouped = group_by_tag(result_children)
+    expected_grouped = group_by_tag(expected_children)
+
+    # Check for missing or extra tags
+    result_tags = set(result_grouped.keys())
+    expected_tags = set(expected_grouped.keys())
+
+    missing_tags = expected_tags - result_tags
+    extra_tags = result_tags - expected_tags
+
+    for tag in missing_tags:
+        errors.append(f"Missing tag '{tag}' at '{current_path}'")
+
+    for tag in extra_tags:
+        errors.append(f"Extra tag '{tag}' at '{current_path}'")
+
+    # Compare children with same tag
+    common_tags = result_tags & expected_tags
+    for tag in common_tags:
+        result_tag_children = result_grouped[tag]
+        expected_tag_children = expected_grouped[tag]
+
+        # Compare count
+        if len(result_tag_children) != len(expected_tag_children):
+            errors.append(
+                f"Child count mismatch for tag '{tag}' at '{current_path}': "
+                f"{len(result_tag_children)} vs {len(expected_tag_children)}"
+            )
+            # Continue with minimum count to avoid index errors
+            min_count = min(
+                len(result_tag_children), len(expected_tag_children)
+            )
+        else:
+            min_count = len(result_tag_children)
+
+        # Compare each child element
+        for i in range(min_count):
+            child_errors = compare_xml_elements(
+                result_tag_children[i],
+                expected_tag_children[i],
+                current_path,
+            )
+            errors.extend(child_errors)
+
+    return errors
+
+
 def test_xml_source_content_comparison():
-    """Test that Source element content matches expected XML."""
+    """Test that Source element hierarchical structure and content matches expected XML."""
     # Parse the BibTeX file
     bib_parser = bibtex.Parser()
     bibdata = bib_parser.parse_file(BIB_FILE)
@@ -201,24 +320,15 @@ def test_xml_source_content_comparison():
             f"Source with tag '{tag}' not found in expected XML"
         )
 
-        # Compare all child elements
-        result_children = {child.tag: child.text for child in result_source}
-        expected_children = {
-            child.tag: child.text for child in expected_source
-        }
+        # Compare hierarchical structure and content
+        errors = compare_xml_elements(
+            result_source, expected_source, f"Source[{tag}]"
+        )
 
-        # Check that all expected elements exist in result
-        for key, expected_value in expected_children.items():
-            assert key in result_children, (
-                f"Missing element '{key}' in result for tag '{tag}'"
-            )
-            # Compare text content (normalize whitespace)
-            result_value = result_children[key] or ""
-            expected_value = expected_value or ""
-            assert result_value.strip() == expected_value.strip(), (
-                f"Element '{key}' mismatch for tag '{tag}': "
-                f"'{result_value}' vs '{expected_value}'"
-            )
+        assert len(errors) == 0, (
+            f"Structure/content mismatch for Source with tag '{tag}':\n"
+            + "\n".join(f"  - {error}" for error in errors)
+        )
 
 
 def test_xml_first_entry_detailed():
