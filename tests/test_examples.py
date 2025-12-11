@@ -1,5 +1,6 @@
 """Tests using example files from the examples directory."""
 
+import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -14,7 +15,15 @@ XML_FILE = TEST_ROOT_DIR / "bib-example.xml"
 
 
 def normalize_xml(xml_str: str) -> str:
-    """Normalize XML string for comparison by parsing and re-serializing."""
+    """Normalize XML string for comparison by parsing and re-serializing.
+
+    This function normalizes XML by:
+    - Parsing and re-serializing to ensure consistent structure
+    - Removing namespace prefixes for comparison
+    - Sorting child elements for consistent ordering
+    - Removing whitespace (newlines, indentation) between tags
+    - Normalizing whitespace in text content
+    """
     try:
         root = ET.fromstring(xml_str)
     except ET.ParseError:
@@ -31,7 +40,18 @@ def normalize_xml(xml_str: str) -> str:
         elem[:] = sorted(elem, key=lambda x: (x.tag, x.text or ""))
 
     sort_children(root)
-    return ET.tostring(root, encoding="unicode")
+    xml_output = ET.tostring(root, encoding="unicode")
+
+    # Normalize whitespace: remove newlines, tabs, and normalize spaces
+    # Remove whitespace between tags (but preserve text content)
+    # First, normalize all whitespace characters to single spaces
+    xml_output = re.sub(r"\s+", " ", xml_output)
+    # Remove spaces between tags (e.g., "> <" becomes "><")
+    xml_output = re.sub(r">\s+<", "><", xml_output)
+    # Remove leading/trailing whitespace
+    xml_output = xml_output.strip()
+
+    return xml_output
 
 
 def test_bib_to_xml_conversion():
