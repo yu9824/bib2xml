@@ -1,4 +1,4 @@
-# `python-template`
+# `bibi2xml`
 
 ```{toctree}
 :maxdepth: 2
