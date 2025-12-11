@@ -1,5 +1,7 @@
 """Tests using example files from the examples directory."""
 
+from __future__ import annotations
+
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -183,7 +185,7 @@ def compare_xml_elements(
     result_elem: ET.Element,
     expected_elem: ET.Element,
     path: str = "",
-) -> list[str]:
+) -> "list[str]":
     """Recursively compare XML elements and their hierarchical structure.
 
     Parameters
