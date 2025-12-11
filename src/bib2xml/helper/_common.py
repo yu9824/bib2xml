@@ -1,10 +1,13 @@
+"""Utility functions for general purposes."""
+
 import inspect
 import pkgutil
-import sys
 from typing import Any
 
 # deprecated in python >=3.12
 from typing import TypeVar  # isort: skip
+
+import sys
 
 if sys.version_info >= (3, 9):
     from collections.abc import Callable
@@ -12,7 +15,6 @@ else:
     from typing import Callable
 
 T = TypeVar("T")
-
 
 PACKAGE_NAMES = {_module.name for _module in pkgutil.iter_modules()}
 
@@ -55,6 +57,7 @@ def is_argument(__callable: "Callable[..., Any]", arg_name: str) -> bool:
     Parameters
     ----------
     __callable : Callable
+        callable object
 
     arg_name : str
         argument name
