@@ -1137,9 +1137,34 @@ ESCAPE_LETTER_PAIRS: "tuple[tuple[str, str], ...]" = (
     (r"}", r""),
 )
 """
-`ESCAPE_LETTER_PAIRS` is defined as an iterable of `(old, new)` tuples
-      where `old` is the character or substring to be replaced and `new` is its
-      replacement.
+Mapping of LaTeX escape sequences to Unicode characters.
+
+This tuple contains pairs of `(old, new)` tuples where `old` is a LaTeX
+escape sequence or special character pattern to be replaced, and `new` is
+its corresponding Unicode character or replacement string.
+
+The mapping includes:
+- Accented characters (acute, grave, circumflex, umlaut, etc.)
+- Special characters (ligatures, symbols, punctuation)
+- LaTeX commands (e.g., ``\\textendash``, ``\\textemdash``)
+- Braces and escape sequences
+
+Notes
+-----
+- The replacements are applied in order, so the order of entries matters
+  for overlapping patterns.
+- This mapping is used by the `escape` function to convert LaTeX-formatted
+  text from BibTeX entries into plain Unicode text suitable for XML output.
+- Some patterns may appear multiple times with slight variations to handle
+  different LaTeX formatting styles.
+
+Examples
+--------
+Common replacements include:
+- ``{\\'{a}}`` → ``á``
+- ``\\ae`` → ``æ``
+- ``\\textendash`` → ``–``
+- ``{\\ss}`` → ``ß``
 """
 
 
@@ -1164,13 +1189,15 @@ def add_element(
     Returns
     -------
     xml.etree.ElementTree.Element
-        The modified `source` element with the new subelement added.
+        The modified `source` element. If `keyname` is found in `fields`,
+        the new subelement is added. Otherwise, the subelement is removed
+        and `source` is returned unchanged.
 
-    Raises
-    ------
-    KeyError
-        If `keyname` is not found in `fields`, the subelement is not added and the
-        original `source` is returned without modifications.
+    Notes
+    -----
+    If `keyname` is not found in `fields`, a subelement is initially created
+    but then immediately removed, leaving `source` unchanged. This ensures
+    that only fields with valid data are included in the XML output.
     """
     try:
         tag = ET.SubElement(source, tagname)
@@ -1186,16 +1213,20 @@ def escape(text: str) -> str:
 
     This function converts the input text to a string and replaces occurrences of
     specific characters according to the mappings defined in `ESCAPE_LETTER_PAIRS`.
+    It is primarily used to convert LaTeX-formatted text from BibTeX entries into
+    plain Unicode text suitable for XML output.
 
     Parameters
     ----------
     text : str
-        The input text to be escaped.
+        The input text to be escaped. Can contain LaTeX escape sequences,
+        special characters, or any other text that needs conversion.
 
     Returns
     -------
     str
-        The escaped text with specified characters replaced.
+        The escaped text with all matching patterns from `ESCAPE_LETTER_PAIRS`
+        replaced with their corresponding Unicode characters or replacement strings.
 
     Notes
     -----
@@ -1203,6 +1234,21 @@ def escape(text: str) -> str:
       where `old` is the character or substring to be replaced and `new` is its
       replacement.
     - If `text` is not a string, it is first converted using `str(text)`.
+    - Replacements are applied in the order they appear in `ESCAPE_LETTER_PAIRS`,
+      so the order matters for overlapping patterns.
+
+    Examples
+    --------
+    >>> escape("{\\'{a}}")
+    'á'
+    >>> escape("\\ae")
+    'æ'
+    >>> escape("\\textendash")
+    '–'
+    >>> escape("Example{\\ss} text")
+    'Exampleß text'
+    >>> escape("Caf{\\'e}")
+    'Café'
     """
     new_text = str(text)
     for old, new in ESCAPE_LETTER_PAIRS:

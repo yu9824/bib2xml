@@ -48,36 +48,78 @@ def is_installed(package_name: str) -> bool:
 
 
 def dummy_func(x: T, *args, **kwargs) -> T:
-    """dummy function
+    """Identity function that returns its first argument unchanged.
+
+    This function ignores all arguments except the first one and returns
+    it as-is. It is useful as a placeholder or default function when
+    a no-operation function is needed.
 
     Parameters
     ----------
     x : T
-        Anything
+        The value to return. Can be any type.
+    *args
+        Additional positional arguments (ignored).
+    **kwargs
+        Additional keyword arguments (ignored).
 
     Returns
     -------
     T
-        same as input
+        The same value as the input `x`, unchanged.
+
+    Examples
+    --------
+    >>> dummy_func(42)
+    42
+    >>> dummy_func("hello", "world", key="value")
+    'hello'
+    >>> dummy_func([1, 2, 3])
+    [1, 2, 3]
     """
     return x
 
 
 def is_argument(__callable: "Callable[..., Any]", arg_name: str) -> bool:
-    """Check to see if it is included in the callable argument.
+    """Check if a callable accepts a specific argument name.
+
+    This function inspects the signature of a callable object and determines
+    whether it accepts an argument with the specified name. This is useful
+    for checking function signatures dynamically, especially when dealing
+    with optional arguments or different function versions.
 
     Parameters
     ----------
-    __callable : Callable
-        callable object
-
+    __callable : Callable[..., Any]
+        A callable object (function, method, class, etc.) whose signature
+        should be inspected.
     arg_name : str
-        argument name
+        The name of the argument to check for in the callable's signature.
 
     Returns
     -------
     bool
-        if included, True
+        `True` if the callable accepts an argument with the name `arg_name`,
+        `False` otherwise.
+
+    Examples
+    --------
+    >>> def example_func(a, b, c=None):
+    ...     pass
+    ...
+    >>> is_argument(example_func, "a")
+    True
+    >>> is_argument(example_func, "d")
+    False
+    >>> is_argument(example_func, "c")
+    True
+
+    Notes
+    -----
+    This function checks parameter names, not parameter types or positions.
+    It will return `True` for any parameter with the matching name, regardless
+    of whether it is a positional argument, keyword-only argument, or has
+    a default value.
     """
     return arg_name in set(inspect.signature(__callable).parameters.keys())
 
