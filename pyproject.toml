@@ -30,12 +30,18 @@ classifiers = [
 test = ["pytest"]
 optional = ["colorlog"]
 dev = ["build"]
-docs = ["sphinx", "sphinx_rtd_theme", "sphinx-markdown-tables", "recommonmark"]
+docs = [
+    "sphinx",
+    "myst-parser",
+    "myst-nb",
+    "sphinx-book-theme",
+    "jupyter-sphinx",
+]
 gui = ["TkEasyGUI"]
 
 [project.urls]
 Homepage = "https://github.com/yu9824/bib2xml"
-# Documentation = "https://readthedocs.org"
+Documentation = "https://yu9824.github.io/bib2xml/"
 # PyPI = "https://pypi.org/project/bib2xml/"
 Source = "https://github.com/yu9824/bib2xml"
 Tracker = "https://github.com/yu9824/bib2xml/issues"
