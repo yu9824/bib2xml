@@ -1,6 +1,8 @@
+import os
+import xml.dom.minidom
 import xml.etree.cElementTree as ET
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 from pybtex.database import (  # type: ignore[import-untyped]
     BibliographyData,
@@ -18,7 +20,11 @@ _logger = get_child_logger(__name__)
 URL_SCHEMA = "http://schemas.microsoft.com/office/word/2004/10/bibliography"
 
 
-def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
+def bib2xml(
+    bibdata: BibliographyData,
+    inxml: Optional[Union[os.PathLike, str]] = None,
+    pretty: bool = False,
+) -> str:
     """Convert bibliography data into an XML formatted string.
 
     This function converts a parsed BibTeX bibliography database into Microsoft
@@ -31,10 +37,13 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
         The bibliography data containing entries to be converted. This should
         be a `pybtex.database.BibliographyData` object obtained from parsing
         a BibTeX file.
-    inxml : Path, optional
+    inxml : Path or str, optional
         Path to an existing XML file to update. If provided, the function will
         parse the existing XML and append new entries to it. If `None` (default),
         a new XML structure is created from scratch.
+    pretty : bool, default False
+        If `True`, the output XML will be formatted with indentation for better
+        readability. If `False` (default), the XML will be output as a single line.
 
     Returns
     -------
@@ -57,6 +66,7 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
       an empty string is used.
     - The output XML is escaped to handle special characters and LaTeX commands
       commonly found in BibTeX entries.
+    - When `pretty=True`, the XML is formatted with indentation using `xml.dom.minidom`.
 
     Examples
     --------
@@ -70,6 +80,9 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
     >>>
     >>> # Append to existing XML file
     >>> xml_str = bib2xml(bibdata, inxml=Path("Sources.xml"))
+    >>>
+    >>> # Format XML with indentation
+    >>> xml_str = bib2xml(bibdata, pretty=True)
     """
     if inxml is None:
         root = ET.Element(
@@ -79,7 +92,8 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
     else:
         ET.register_namespace("", URL_SCHEMA)
         ET.register_namespace("b", URL_SCHEMA)
-        root = ET.parse(inxml).getroot()
+        inxml_path = Path(inxml)
+        root = ET.parse(inxml_path).getroot()
 
     # typing
     key: str
@@ -119,4 +133,19 @@ def bib2xml(bibdata: BibliographyData, inxml: Optional[Path] = None) -> str:
 
     # hack, unable to get register_namespace to work right when parsing the doc
     xml_bytes = ET.tostring(root)
-    return escape(xml_bytes.decode(encoding="utf-8"))
+    xml_str = escape(xml_bytes.decode(encoding="utf-8"))
+
+    if pretty:
+        # Format XML with indentation
+        dom = xml.dom.minidom.parseString(xml_str)
+        pretty_xml = dom.toprettyxml(indent="  ")
+        # Remove XML declaration and extra newline if present
+        lines = pretty_xml.split("\n")
+        if lines and lines[0].startswith("<?xml"):
+            lines = lines[1:]
+        # Remove trailing empty lines
+        while lines and not lines[-1].strip():
+            lines.pop()
+        return "\n".join(lines)
+
+    return xml_str
