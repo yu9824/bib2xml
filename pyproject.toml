@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 name = "bib2xml"
 dynamic = ["version"]
 dependencies = ["pybtex", "setuptools; python_version >= '3.12'"]
-requires-python = ">= 3.7"
+requires-python = ">= 3.8"
 authors = [{ name = "yu9824" }]
 maintainers = [{ name = "yu9824" }]
 description = ""
@@ -23,7 +23,6 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "License :: OSI Approved :: MIT License",
 ] # https://pypi.org/classifiers/
 
 [project.optional-dependencies]
@@ -37,7 +36,6 @@ docs = [
     "sphinx-book-theme",
     "jupyter-sphinx",
 ]
-gui = ["TkEasyGUI"]
 
 [project.urls]
 Homepage = "https://github.com/yu9824/bib2xml"
@@ -45,7 +43,6 @@ Documentation = "https://yu9824.github.io/bib2xml/"
 # PyPI = "https://pypi.org/project/bib2xml/"
 Source = "https://github.com/yu9824/bib2xml"
 Tracker = "https://github.com/yu9824/bib2xml/issues"
-Changelog = "https://github.com/yu9824/bib2xml/blob/main/CHANGELOG.md"
 
 [project.scripts]
 bib2xml = "bib2xml.__main__:entrypoint"
