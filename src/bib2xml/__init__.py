@@ -27,9 +27,9 @@ Python
 
 from bib2xml._core._core import bib2xml
 
-__version__ = "0.1.5"
+__version__ = "0.2.0"
 __license__ = "MIT"
 __author__ = "yu9824"
-__copyright__ = "Copyright © 2024 yu9824"
+__copyright__ = "Copyright © 2025 yu9824"
 
 __all__ = ("bib2xml",)
