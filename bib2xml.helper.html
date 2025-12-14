@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>bib2xml.helper package &#8212; bib2xml 0.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=7f7c277e"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bib2xml.helper';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="bib2xml.logging package" href="bib2xml.logging.html" />
+    <link rel="prev" title="bib2xml package" href="bib2xml.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">bib2xml 0.2.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">bib2xml</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="bib2xml.html">bib2xml package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">bib2xml.helper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bib2xml.logging.html">bib2xml.logging package</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/bib2xml.helper.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>bib2xml.helper package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.add_element"><code class="docutils literal notranslate"><span class="pre">add_element()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_func"><code class="docutils literal notranslate"><span class="pre">dummy_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_tqdm"><code class="docutils literal notranslate"><span class="pre">dummy_tqdm</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_tqdm.__iter__"><code class="docutils literal notranslate"><span class="pre">dummy_tqdm.__iter__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_tqdm.__getattr__"><code class="docutils literal notranslate"><span class="pre">dummy_tqdm.__getattr__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.escape"><code class="docutils literal notranslate"><span class="pre">escape()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.is_argument"><code class="docutils literal notranslate"><span class="pre">is_argument()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.is_installed"><code class="docutils literal notranslate"><span class="pre">is_installed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-bib2xml.helper.constants">bib2xml.helper.constants module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.constants.SRCTYPES"><code class="docutils literal notranslate"><span class="pre">SRCTYPES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.constants.XLATE"><code class="docutils literal notranslate"><span class="pre">XLATE</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-bib2xml.helper">
+<span id="bib2xml-helper-package"></span><h1>bib2xml.helper package<a class="headerlink" href="#module-bib2xml.helper" title="Link to this heading">#</a></h1>
+<p>Helper utilities for BibTeX to XML conversion.</p>
+<p>This module provides utility functions and classes used throughout the
+bib2xml package. It includes:</p>
+<ul class="simple">
+<li><p>XML manipulation utilities (<cite>add_element</cite>, <cite>escape</cite>)</p></li>
+<li><p>General-purpose helper functions (<cite>is_installed</cite>, <cite>is_argument</cite>, <cite>dummy_func</cite>)</p></li>
+<li><p>Utility classes (<cite>dummy_tqdm</cite>)</p></li>
+<li><p>Decorators (<cite>deprecated</cite>)</p></li>
+</ul>
+<p>These utilities support the core conversion functionality and provide
+common operations needed for processing bibliography data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bib2xml.helper.add_element">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">add_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Element</span></span></span><a class="headerlink" href="#bib2xml.helper.add_element" title="Link to this definition">#</a></dt>
+<dd><p>Add a subelement to the given XML Element <cite>source</cite> with the specified <cite>tagname</cite>,
+setting its text content from <cite>fields[keyname]</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>xml.etree.ElementTree.Element</em>) – The XML element to which the subelement will be added.</p></li>
+<li><p><strong>tagname</strong> (<em>str</em>) – The tag name of the subelement to be created.</p></li>
+<li><p><strong>fields</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – A mapping containing the fields from which to extract the content.</p></li>
+<li><p><strong>keyname</strong> (<em>str</em>) – The key in <cite>fields</cite> whose value will be used as the text content of the subelement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modified <cite>source</cite> element. If <cite>keyname</cite> is found in <cite>fields</cite>,
+the new subelement is added. Otherwise, the subelement is removed
+and <cite>source</cite> is returned unchanged.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xml.etree.ElementTree.Element</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If <cite>keyname</cite> is not found in <cite>fields</cite>, a subelement is initially created
+but then immediately removed, leaving <cite>source</cite> unchanged. This ensures
+that only fields with valid data are included in the XML output.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bib2xml.helper.deprecated">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">deprecated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#bib2xml.helper.deprecated" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to mark a function as deprecated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> (<em>str</em><em>, </em><em>optional</em>) – Explanation of why the function is deprecated or what should be used instead.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A decorator that wraps the target function and emits a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code>
+upon each call.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Preserves the wrapped function’s type signature.</p></li>
+<li><p>Emits a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> every time the function is called.</p></li>
+<li><p>Appends a <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">deprecated::</span></code> directive to the function’s docstring.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bib2xml.helper.dummy_func">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">dummy_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#bib2xml.helper.dummy_func" title="Link to this definition">#</a></dt>
+<dd><p>Identity function that returns its first argument unchanged.</p>
+<p>This function ignores all arguments except the first one and returns
+it as-is. It is useful as a placeholder or default function when
+a no-operation function is needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>T</em>) – The value to return. Can be any type.</p></li>
+<li><p><strong>*args</strong> – Additional positional arguments (ignored).</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments (ignored).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same value as the input <cite>x</cite>, unchanged.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dummy_func</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy_func</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="go">&#39;hello&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy_func</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bib2xml.helper.dummy_tqdm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">dummy_tqdm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_dummy_tqdm__iterable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bib2xml.helper.dummy_tqdm" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A dummy class that mimics the behavior of ‘tqdm’ for testing or placeholder purposes.</p>
+<p>This class allows you to use a tqdm-like interface in cases where the
+progress bar functionality is not needed or when testing code without
+depending on the actual <cite>tqdm</cite> library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>__iterable</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – An iterable object that will be wrapped and returned by the class.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bib2xml.helper.dummy_tqdm.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#bib2xml.helper.dummy_tqdm.__iter__" title="Link to this definition">#</a></dt>
+<dd><p>Returns an iterator for the provided iterable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bib2xml.helper.dummy_tqdm.__getattr__">
+<span class="sig-name descname"><span class="pre">__getattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#bib2xml.helper.dummy_tqdm.__getattr__" title="Link to this definition">#</a></dt>
+<dd><p>Returns a no-operation function for unsupported attributes.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bib2xml.helper.escape">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">escape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#bib2xml.helper.escape" title="Link to this definition">#</a></dt>
+<dd><p>Replace specific characters in the input text based on predefined escape sequences.</p>
+<p>This function converts the input text to a string and replaces occurrences of
+specific characters according to the mappings defined in <cite>ESCAPE_LETTER_PAIRS</cite>.
+It is primarily used to convert LaTeX-formatted text from BibTeX entries into
+plain Unicode text suitable for XML output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The input text to be escaped. Can contain LaTeX escape sequences,
+special characters, or any other text that needs conversion.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The escaped text with all matching patterns from <cite>ESCAPE_LETTER_PAIRS</cite>
+replaced with their corresponding Unicode characters or replacement strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p><cite>ESCAPE_LETTER_PAIRS</cite> must be defined as an iterable of <cite>(old, new)</cite> tuples
+where <cite>old</cite> is the character or substring to be replaced and <cite>new</cite> is its
+replacement.</p></li>
+<li><p>If <cite>text</cite> is not a string, it is first converted using <cite>str(text)</cite>.</p></li>
+<li><p>Replacements are applied in the order they appear in <cite>ESCAPE_LETTER_PAIRS</cite>,
+so the order matters for overlapping patterns.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;{</span><span class="se">\&#39;</span><span class="si">{a}</span><span class="s2">}&quot;</span><span class="p">)</span>
+<span class="go">&#39;á&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\a</span><span class="s2">e&quot;</span><span class="p">)</span>
+<span class="go">&#39;æ&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">extendash&quot;</span><span class="p">)</span>
+<span class="go">&#39;–&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;Example{\ss} text&quot;</span><span class="p">)</span>
+<span class="go">&#39;Exampleß text&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;Caf{</span><span class="se">\&#39;</span><span class="s2">e}&quot;</span><span class="p">)</span>
+<span class="go">&#39;Café&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bib2xml.helper.is_argument">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">is_argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">__callable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#bib2xml.helper.is_argument" title="Link to this definition">#</a></dt>
+<dd><p>Check if a callable accepts a specific argument name.</p>
+<p>This function inspects the signature of a callable object and determines
+whether it accepts an argument with the specified name. This is useful
+for checking function signatures dynamically, especially when dealing
+with optional arguments or different function versions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>__callable</strong> (<em>Callable</em><em>[</em><em>...</em><em>, </em><em>Any</em><em>]</em>) – A callable object (function, method, class, etc.) whose signature
+should be inspected.</p></li>
+<li><p><strong>arg_name</strong> (<em>str</em>) – The name of the argument to check for in the callable’s signature.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>True</cite> if the callable accepts an argument with the name <cite>arg_name</cite>,
+<cite>False</cite> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">example_func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_argument</span><span class="p">(</span><span class="n">example_func</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_argument</span><span class="p">(</span><span class="n">example_func</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_argument</span><span class="p">(</span><span class="n">example_func</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>This function checks parameter names, not parameter types or positions.
+It will return <cite>True</cite> for any parameter with the matching name, regardless
+of whether it is a positional argument, keyword-only argument, or has
+a default value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bib2xml.helper.is_installed">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.</span></span><span class="sig-name descname"><span class="pre">is_installed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#bib2xml.helper.is_installed" title="Link to this definition">#</a></dt>
+<dd><p>Check whether a given Python package is installed.</p>
+<p>Uses <cite>importlib.util.find_spec</cite> to determine if the specified package
+can be imported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>package_name</strong> (<em>str</em>) – The name of the package (e.g., “sklearn”).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the package is installed, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-bib2xml.helper.constants">
+<span id="bib2xml-helper-constants-module"></span><h2>bib2xml.helper.constants module<a class="headerlink" href="#module-bib2xml.helper.constants" title="Link to this heading">#</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="bib2xml.helper.constants.SRCTYPES">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.constants.</span></span><span class="sig-name descname"><span class="pre">SRCTYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">mappingproxy({'book':</span> <span class="pre">'Book',</span> <span class="pre">'article':</span> <span class="pre">'JournalArticle',</span> <span class="pre">'incollection':</span> <span class="pre">'ArticleInAPeriodical',</span> <span class="pre">'inproceedings':</span> <span class="pre">'ConferenceProceedings',</span> <span class="pre">'misc':</span> <span class="pre">'Misc',</span> <span class="pre">'phdthesis':</span> <span class="pre">'Report',</span> <span class="pre">'techreport':</span> <span class="pre">'Report'})</span></em><a class="headerlink" href="#bib2xml.helper.constants.SRCTYPES" title="Link to this definition">#</a></dt>
+<dd><p>Mapping of source types to standardized reference types.</p>
+<p>This dictionary-like immutable mapping provides a conversion from common
+bibliographic source type keys to their corresponding standardized reference
+type names.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SRCTYPES</span><span class="p">[</span><span class="s2">&quot;book&quot;</span><span class="p">]</span>
+<span class="go">&#39;Book&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SRCTYPES</span><span class="p">[</span><span class="s2">&quot;article&quot;</span><span class="p">]</span>
+<span class="go">&#39;JournalArticle&#39;</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>This mapping is implemented using <cite>MappingProxyType</cite> to ensure that it is
+immutable and cannot be modified at runtime.</p>
+<p>Keys represent common BibTeX-like source types, and values represent their
+standardized reference type names.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bib2xml.helper.constants.XLATE">
+<span class="sig-prename descclassname"><span class="pre">bib2xml.helper.constants.</span></span><span class="sig-name descname"><span class="pre">XLATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(('b:Title',</span> <span class="pre">'title'),</span> <span class="pre">('b:Year',</span> <span class="pre">'year'),</span> <span class="pre">('b:City',</span> <span class="pre">'city'),</span> <span class="pre">('b:Publisher',</span> <span class="pre">'publisher'),</span> <span class="pre">('b:ConferenceName',</span> <span class="pre">'organization'),</span> <span class="pre">('b:URL',</span> <span class="pre">'url'),</span> <span class="pre">('b:BookTitle',</span> <span class="pre">'booktitle'),</span> <span class="pre">('b:ChapterNumber',</span> <span class="pre">'chapter'),</span> <span class="pre">('b:Edition',</span> <span class="pre">'edition'),</span> <span class="pre">('b:Institution',</span> <span class="pre">'institution'),</span> <span class="pre">('b:JournalName',</span> <span class="pre">'journal'),</span> <span class="pre">('b:Month',</span> <span class="pre">'month'),</span> <span class="pre">('b:Volume',</span> <span class="pre">'volume'),</span> <span class="pre">('b:Issue',</span> <span class="pre">'number'),</span> <span class="pre">('b:Pages',</span> <span class="pre">'pages'),</span> <span class="pre">('b:Type',</span> <span class="pre">'type'),</span> <span class="pre">('b:URL',</span> <span class="pre">'howpublished'))</span></em><a class="headerlink" href="#bib2xml.helper.constants.XLATE" title="Link to this definition">#</a></dt>
+<dd><p>Mapping of XML bibliographic field names to BibTeX-style field names.</p>
+<p>This tuple of tuples provides a predefined mapping between bibliographic XML element
+names (prefixed with <cite>“b:”</cite>) and their corresponding BibTeX-style field names.</p>
+<dl class="simple">
+<dt>Each inner tuple contains:</dt><dd><ul class="simple">
+<li><p>The XML element name as a string.</p></li>
+<li><p>The corresponding BibTeX-style field name as a string.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This mapping is useful for converting XML-based bibliographic data to BibTeX format.</p></li>
+<li><p>The <cite>“b:URL”</cite> field appears twice, mapping to both <cite>“url”</cite> and <cite>“howpublished”</cite>,
+which may require special handling to avoid conflicts.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bib2xml.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">bib2xml package</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bib2xml.logging.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">bib2xml.logging package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.add_element"><code class="docutils literal notranslate"><span class="pre">add_element()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_func"><code class="docutils literal notranslate"><span class="pre">dummy_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_tqdm"><code class="docutils literal notranslate"><span class="pre">dummy_tqdm</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_tqdm.__iter__"><code class="docutils literal notranslate"><span class="pre">dummy_tqdm.__iter__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.dummy_tqdm.__getattr__"><code class="docutils literal notranslate"><span class="pre">dummy_tqdm.__getattr__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.escape"><code class="docutils literal notranslate"><span class="pre">escape()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.is_argument"><code class="docutils literal notranslate"><span class="pre">is_argument()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.is_installed"><code class="docutils literal notranslate"><span class="pre">is_installed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-bib2xml.helper.constants">bib2xml.helper.constants module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.constants.SRCTYPES"><code class="docutils literal notranslate"><span class="pre">SRCTYPES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bib2xml.helper.constants.XLATE"><code class="docutils literal notranslate"><span class="pre">XLATE</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By yu9824
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, yu9824.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
